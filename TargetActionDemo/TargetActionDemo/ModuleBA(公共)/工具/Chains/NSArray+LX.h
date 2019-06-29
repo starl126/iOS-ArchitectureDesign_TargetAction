@@ -2,11 +2,9 @@
 //  NSArray+LX.h
 //  test
 //
-//  Created by 刘欣 on 2019/5/5.
+//  Created by 天边的星星 on 2019/5/5.
 //  Copyright © 2019 starxin. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
