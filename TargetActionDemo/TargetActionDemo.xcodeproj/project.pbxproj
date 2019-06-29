@@ -27,6 +27,10 @@
 		4B9FF8F022C7498E00905548 /* LXCHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8EF22C7498E00905548 /* LXCHomeController.m */; };
 		4B9FF8F322C7499B00905548 /* LXDHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8F222C7499B00905548 /* LXDHomeController.m */; };
 		4B9FF8F622C749DC00905548 /* LXEHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8F522C749DC00905548 /* LXEHomeController.m */; };
+		4B9FF90122C74FBE00905548 /* CALayer+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8F922C74FBD00905548 /* CALayer+LX.m */; };
+		4B9FF90222C74FBE00905548 /* NSArray+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8FB22C74FBD00905548 /* NSArray+LX.m */; };
+		4B9FF90322C74FBE00905548 /* UIView+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8FE22C74FBE00905548 /* UIView+LX.m */; };
+		4B9FF90422C74FBE00905548 /* NSDictionary+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF90022C74FBE00905548 /* NSDictionary+LX.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +99,14 @@
 		4B9FF8F222C7499B00905548 /* LXDHomeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXDHomeController.m; sourceTree = "<group>"; };
 		4B9FF8F422C749DC00905548 /* LXEHomeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXEHomeController.h; sourceTree = "<group>"; };
 		4B9FF8F522C749DC00905548 /* LXEHomeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXEHomeController.m; sourceTree = "<group>"; };
+		4B9FF8F922C74FBD00905548 /* CALayer+LX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LX.m"; sourceTree = "<group>"; };
+		4B9FF8FA22C74FBD00905548 /* NSArray+LX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LX.h"; sourceTree = "<group>"; };
+		4B9FF8FB22C74FBD00905548 /* NSArray+LX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LX.m"; sourceTree = "<group>"; };
+		4B9FF8FC22C74FBD00905548 /* CALayer+LX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+LX.h"; sourceTree = "<group>"; };
+		4B9FF8FD22C74FBD00905548 /* UIView+LX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LX.h"; sourceTree = "<group>"; };
+		4B9FF8FE22C74FBE00905548 /* UIView+LX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LX.m"; sourceTree = "<group>"; };
+		4B9FF8FF22C74FBE00905548 /* NSDictionary+LX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+LX.h"; sourceTree = "<group>"; };
+		4B9FF90022C74FBE00905548 /* NSDictionary+LX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+LX.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +250,7 @@
 		4B9FF8C622C73FF000905548 /* ModuleBA(公共) */ = {
 			isa = PBXGroup;
 			children = (
+				4B9FF8F722C74F8E00905548 /* 工具 */,
 				4B9FF8CF22C740EF00905548 /* Model */,
 				4B9FF8CE22C740CB00905548 /* Controller */,
 				4B9FF8CD22C740B800905548 /* View */,
@@ -318,6 +331,29 @@
 				4B9FF8E622C7489600905548 /* Target_ModuleE.m */,
 			);
 			path = Actions;
+			sourceTree = "<group>";
+		};
+		4B9FF8F722C74F8E00905548 /* 工具 */ = {
+			isa = PBXGroup;
+			children = (
+				4B9FF8F822C74FA300905548 /* Chains */,
+			);
+			path = "工具";
+			sourceTree = "<group>";
+		};
+		4B9FF8F822C74FA300905548 /* Chains */ = {
+			isa = PBXGroup;
+			children = (
+				4B9FF8FC22C74FBD00905548 /* CALayer+LX.h */,
+				4B9FF8F922C74FBD00905548 /* CALayer+LX.m */,
+				4B9FF8FA22C74FBD00905548 /* NSArray+LX.h */,
+				4B9FF8FB22C74FBD00905548 /* NSArray+LX.m */,
+				4B9FF8FF22C74FBE00905548 /* NSDictionary+LX.h */,
+				4B9FF90022C74FBE00905548 /* NSDictionary+LX.m */,
+				4B9FF8FD22C74FBD00905548 /* UIView+LX.h */,
+				4B9FF8FE22C74FBE00905548 /* UIView+LX.m */,
+			);
+			path = Chains;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -450,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B9FF90222C74FBE00905548 /* NSArray+LX.m in Sources */,
 				4B9FF8E722C7489600905548 /* Target_ModuleE.m in Sources */,
 				4B9FF8ED22C7498000905548 /* LXBHomeController.m in Sources */,
 				4B9FF8D622C7429A00905548 /* Target_ModuleA.m in Sources */,
@@ -458,7 +495,10 @@
 				4B9FF8D222C7421C00905548 /* LXMediator.m in Sources */,
 				4B9FF89522C73A0700905548 /* main.m in Sources */,
 				4B9FF8F322C7499B00905548 /* LXDHomeController.m in Sources */,
+				4B9FF90122C74FBE00905548 /* CALayer+LX.m in Sources */,
+				4B9FF90422C74FBE00905548 /* NSDictionary+LX.m in Sources */,
 				4B9FF8F022C7498E00905548 /* LXCHomeController.m in Sources */,
+				4B9FF90322C74FBE00905548 /* UIView+LX.m in Sources */,
 				4B9FF88722C73A0500905548 /* AppDelegate.m in Sources */,
 				4B9FF8B922C73AD500905548 /* LXTabBarController.m in Sources */,
 				4B9FF8DF22C7486300905548 /* Target_ModuleC.m in Sources */,
