@@ -1,0 +1,29 @@
+//
+//  targetActionPreHeader.pch
+//  TargetActionDemo
+//
+//  Created by 天边的星星 on 2019/6/29.
+//  Copyright © 2019 starxin. All rights reserved.
+//
+
+#ifndef targetActionPreHeader_pch
+#define targetActionPreHeader_pch
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import "ModuleBA(公共)/BAHeader.h"
+    #import "ModuleA(首页)/AHeader.h"
+    #import "ModuleB(直播)/BHeader.h"
+    #import "ModuleC(消息)/CHeader.h"
+    #import "ModuleD(关注)/DHeader.h"
+    #import "ModuleE(更多)/EHeader.h"
+
+#if DEBUG
+    #define NSLog(fmt, ...) NSLog((@"文件名:%@, 方法名:%s, 行数:%d, 打印内容:" fmt), [NSString stringWithUTF8String:__FILE__].lastPathComponent, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+        #define NSLog(fmt, ...)
+#endif
+
+#endif
+
+#endif /* targetActionPreHeader_pch */
