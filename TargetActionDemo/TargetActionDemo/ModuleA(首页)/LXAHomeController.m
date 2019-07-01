@@ -10,6 +10,7 @@
 
 @interface LXAHomeController ()
 
+
 @end
 
 @implementation LXAHomeController
@@ -18,5 +19,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
 }
+
+
 
 @end

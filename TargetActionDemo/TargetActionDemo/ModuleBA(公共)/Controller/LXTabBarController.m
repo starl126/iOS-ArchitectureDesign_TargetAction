@@ -19,23 +19,23 @@
     
     LXAHomeController* AHome = [[LXAHomeController alloc] init];
     LXNavigationController* nav1 = [[LXNavigationController alloc] initWithRootViewController:AHome];
-    nav1.tabBarItem = [self p_setTabBarItemTitle:@"首页" image:nil selectedImage:nil];
+    nav1.tabBarItem = [self p_setTabBarItemTitle:@"首页" image:@"shouye" selectedImage:@"shouye_sel"];
     
     LXBHomeController* BHome = [[LXBHomeController alloc] init];
     LXNavigationController* nav2 = [[LXNavigationController alloc] initWithRootViewController:BHome];
-    nav2.tabBarItem = [self p_setTabBarItemTitle:@"直播" image:nil selectedImage:nil];
+    nav2.tabBarItem = [self p_setTabBarItemTitle:@"直播" image:@"zhibo" selectedImage:@"zhibo_sel"];
     
     LXCHomeController* CHome = [[LXCHomeController alloc] init];
     LXNavigationController* nav3 = [[LXNavigationController alloc] initWithRootViewController:CHome];
-    nav3.tabBarItem = [self p_setTabBarItemTitle:@"消息" image:nil selectedImage:nil];
+    nav3.tabBarItem = [self p_setTabBarItemTitle:@"消息" image:@"xiaoxi" selectedImage:@"xiaoxi_sel"];
     
     LXDHomeController* DHome = [[LXDHomeController alloc] init];
     LXNavigationController* nav4 = [[LXNavigationController alloc] initWithRootViewController:DHome];
-    nav4.tabBarItem = [self p_setTabBarItemTitle:@"关注" image:nil selectedImage:nil];
+    nav4.tabBarItem = [self p_setTabBarItemTitle:@"关注" image:@"guanzhu" selectedImage:@"guanzhu_sel"];
     
     LXEHomeController* EHome = [[LXEHomeController alloc] init];
     LXNavigationController* nav5 = [[LXNavigationController alloc] initWithRootViewController:EHome];
-    nav5.tabBarItem = [self p_setTabBarItemTitle:@"更多" image:nil selectedImage:nil];
+    nav5.tabBarItem = [self p_setTabBarItemTitle:@"更多" image:@"gengduo" selectedImage:@"gengduo_sel"];
     
     self.viewControllers = @[nav1,nav2,nav3,nav4,nav5];
 }
