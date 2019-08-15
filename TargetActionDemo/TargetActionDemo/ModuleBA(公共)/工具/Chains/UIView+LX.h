@@ -438,9 +438,9 @@ typedef void (^LXAnimationBOOLCompletion)(BOOL);
 - (UICollectionViewCell* (^)(NSIndexPath*))lx_cellForItemAtIndexPath;
 - (NSArray<UICollectionViewCell*>* (^)(void))lx_visibleCells;
 
-- (UICollectionReusableView* (^)(NSString*, NSIndexPath*))lx_supplementaryViewForElementKindIndexPath;
-- (NSArray<UICollectionReusableView*>* (^)(NSString*    ))lx_visibleSupplementaryViewsOfKind;
-- (NSArray<NSIndexPath*>* (^)(NSString*))lx_indexPathsForVisibleSupplementaryElementsOfKind;
+- (UICollectionReusableView* (^)(NSString*, NSIndexPath*))lx_supplementaryViewForElementKindIndexPath API_AVAILABLE(ios(9_0));
+- (NSArray<UICollectionReusableView*>* (^)(NSString*    ))lx_visibleSupplementaryViewsOfKind API_AVAILABLE(ios(9_0));
+- (NSArray<NSIndexPath*>* (^)(NSString*))lx_indexPathsForVisibleSupplementaryElementsOfKind API_AVAILABLE(ios(9_0));
 
 - (UICollectionView* (^)(NSIndexPath*, UICollectionViewScrollPosition, BOOL))lx_scrollToItemAtIndexPathScrollPositionAnimated;
 
