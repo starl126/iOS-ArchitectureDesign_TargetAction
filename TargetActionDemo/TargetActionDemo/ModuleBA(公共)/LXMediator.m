@@ -296,14 +296,14 @@ static LXMediator* instance = nil;
 }
 + (id)performTarget:(NSString*)targetName action:(NSString*)actionName paraArray:(NSArray*)paraArr {
     
-    NSString* targetNameClass = [NSString stringWithFormat:@"Action_%@", targetName];
+    NSString* targetNameClass = [NSString stringWithFormat:@"Target_%@", targetName];
     Class targetCls = NSClassFromString(targetNameClass);
     if (targetCls == nil) {//不存在此类型
         NSAssert(targetCls, @"target-action机制错误： %@类型不存在", targetNameClass);
         return nil;
     }
-    
-    SEL sel = NSSelectorFromString(actionName);
+    NSString* actionFullName = [NSString stringWithFormat:@"Action_%@", actionName];
+    SEL sel = NSSelectorFromString(actionFullName);
     
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincompatible-pointer-types"

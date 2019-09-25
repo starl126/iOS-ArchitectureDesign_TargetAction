@@ -250,13 +250,13 @@
 		4B9FF8C622C73FF000905548 /* ModuleBA(公共) */ = {
 			isa = PBXGroup;
 			children = (
-				4B9FF8F722C74F8E00905548 /* 工具 */,
-				4B9FF8CF22C740EF00905548 /* Model */,
-				4B9FF8CE22C740CB00905548 /* Controller */,
-				4B9FF8CD22C740B800905548 /* View */,
+				4B9FF8C722C7402C00905548 /* BAHeader.h */,
 				4B9FF8D022C7421C00905548 /* LXMediator.h */,
 				4B9FF8D122C7421C00905548 /* LXMediator.m */,
-				4B9FF8C722C7402C00905548 /* BAHeader.h */,
+				4B9FF8F722C74F8E00905548 /* 工具 */,
+				4B9FF8CE22C740CB00905548 /* Controller */,
+				4B9FF8CF22C740EF00905548 /* Model */,
+				4B9FF8CD22C740B800905548 /* View */,
 			);
 			path = "ModuleBA(公共)";
 			sourceTree = "<group>";
