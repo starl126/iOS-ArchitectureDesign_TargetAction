@@ -115,7 +115,7 @@ static LXMediator* instance = nil;
         }
         [paras addObject:element.lastObject];
     }
-    
+
     // 安全考虑，防止黑客通过远程方式调用本地模块。后期可根据需要加入更加复杂的安全逻辑
     NSString *actionName = [url.path stringByReplacingOccurrencesOfString:@"/" withString:@""];
     if ([actionName hasPrefix:@"native"]) {
@@ -146,59 +146,69 @@ static LXMediator* instance = nil;
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
     invocation.target = target;
     invocation.selector = action;
-    //参数传递
-    [params enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        //参数校验处理
-        const char* argumentType = [sig getArgumentTypeAtIndex:idx+2];
-        if (strcmp(argumentType, @encode(id)) == 0) {
-            [invocation setArgument:&obj atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(NSInteger)) == 0) {
-            NSInteger result = [obj integerValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(CGFloat)) == 0) {
-            CGFloat result = [obj doubleValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(NSUInteger)) == 0) {
-            NSUInteger result = [obj unsignedIntegerValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(BOOL)) == 0) {
-            NSUInteger result = [obj boolValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(float)) == 0) {
-            float result = [obj floatValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(int)) == 0) {
-            int result = [obj intValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(short)) == 0) {
-            short result = [obj shortValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(long)) == 0) {
-            long result = [obj longValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(unsigned int)) == 0) {
-            unsigned int result = [obj unsignedIntValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(unsigned short)) == 0) {
-            unsigned short result = [obj unsignedShortValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(unsigned long)) == 0) {
-            unsigned long result = [obj unsignedLongValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(unsigned long long)) == 0) {
-            unsigned long long result = [obj unsignedLongLongValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(char)) == 0) {
-            char result = [obj charValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else if (strcmp(argumentType, @encode(unsigned char)) == 0) {
-            unsigned char result = [obj unsignedCharValue];
-            [invocation setArgument:&result atIndex:idx+2];
-        }else {
-            [invocation setArgument:&obj atIndex:idx+2];
-        }
-    }];
+    
+    //校正参数匹配性,DEBUG熔断处理
+    NSUInteger paramsCount = sig.numberOfArguments;
+    NSAssert(paramsCount >= params.count+2, @"方法名：%@和传输参数不匹配",NSStringFromSelector(action));
+    
+    if (paramsCount > 2) {
+        //参数传递
+        [params enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if (paramsCount <= idx+2) {//Release截流处理
+                *stop = YES;
+            }
+            //参数校验处理
+            const char* argumentType = [sig getArgumentTypeAtIndex:idx+2];
+            if (strcmp(argumentType, @encode(id)) == 0) {
+                [invocation setArgument:&obj atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(NSInteger)) == 0) {
+                NSInteger result = [obj integerValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(CGFloat)) == 0) {
+                CGFloat result = [obj doubleValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(NSUInteger)) == 0) {
+                NSUInteger result = [obj unsignedIntegerValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(BOOL)) == 0) {
+                NSUInteger result = [obj boolValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(float)) == 0) {
+                float result = [obj floatValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(int)) == 0) {
+                int result = [obj intValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(short)) == 0) {
+                short result = [obj shortValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(long)) == 0) {
+                long result = [obj longValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(unsigned int)) == 0) {
+                unsigned int result = [obj unsignedIntValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(unsigned short)) == 0) {
+                unsigned short result = [obj unsignedShortValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(unsigned long)) == 0) {
+                unsigned long result = [obj unsignedLongValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(unsigned long long)) == 0) {
+                unsigned long long result = [obj unsignedLongLongValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(char)) == 0) {
+                char result = [obj charValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else if (strcmp(argumentType, @encode(unsigned char)) == 0) {
+                unsigned char result = [obj unsignedCharValue];
+                [invocation setArgument:&result atIndex:idx+2];
+            }else {
+                [invocation setArgument:&obj atIndex:idx+2];
+            }
+        }];
+    }
     [invocation invokeWithTarget:target];
     
     //返回类型判断
