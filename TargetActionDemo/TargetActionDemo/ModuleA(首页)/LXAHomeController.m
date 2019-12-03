@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
+    self.view.lx_backgroundColor(UIColor.lightGrayColor);
 }
 
 

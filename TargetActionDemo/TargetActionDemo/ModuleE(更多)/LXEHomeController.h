@@ -6,11 +6,9 @@
 //  Copyright © 2019 starxin. All rights reserved.
 //
 
-#import "LXBaseController.h"
-
 NS_ASSUME_NONNULL_BEGIN
 ///更多
-@interface LXEHomeController : LXBaseController
+@interface LXEHomeController : UIViewController
 
 @end
 

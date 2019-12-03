@@ -10,7 +10,11 @@
 #define targetActionPreHeader_pch
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
+
+    #import <YYModel/YYModel.h>
+
+    #import "ProjectHeader.h"
+
     #import "ModuleBA(公共)/BAHeader.h"
     #import "ModuleA(首页)/AHeader.h"
     #import "ModuleB(直播)/BHeader.h"
@@ -19,9 +23,9 @@
     #import "ModuleE(更多)/EHeader.h"
 
 #if DEBUG
-    #define NSLog(fmt, ...) NSLog((@"文件名:%@, 方法名:%s, 行数:%d, 打印内容:" fmt), [NSString stringWithUTF8String:__FILE__].lastPathComponent, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+    #define LXLog(...) printf("\n文件名:%s, 方法名:%s, 行数:%d, 时间:%s, 打印内容: %s", [NSString stringWithUTF8String:__FILE__].lastPathComponent.UTF8String,__PRETTY_FUNCTION__,__LINE__,__TIME__,[NSString stringWithFormat: __VA_ARGS__].UTF8String)
 #else
-        #define NSLog(fmt, ...)
+    #define LXLog(fmt, ...)
 #endif
 
 #endif

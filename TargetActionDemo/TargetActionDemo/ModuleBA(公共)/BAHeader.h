@@ -9,12 +9,6 @@
 #ifndef BAHeader_h
 #define BAHeader_h
 
-#import "LXMediator.h"
-
-#import "Controller/LXBaseController.h"
-#import "Controller/LXNavigationController.h"
-#import "Controller/LXTabBarController.h"
-
 #import "工具/Chains/CALayer+LX.h"
 #import "工具/Chains/NSArray+LX.h"
 #import "工具/Chains/NSDictionary+LX.h"

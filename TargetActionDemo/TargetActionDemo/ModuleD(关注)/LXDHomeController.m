@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"关注";
+    self.view.lx_backgroundColor(UIColor.purpleColor);
 }
 
 @end

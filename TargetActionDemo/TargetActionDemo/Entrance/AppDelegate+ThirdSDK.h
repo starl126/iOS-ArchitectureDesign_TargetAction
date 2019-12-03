@@ -1,14 +1,16 @@
 //
-//  LXAHomeController.h
+//  AppDelegate+ThirdSDK.h
 //  TargetActionDemo
 //
-//  Created by 天边的星星 on 2019/6/29.
+//  Created by 天边的星星 on 2019/12/3.
 //  Copyright © 2019 starxin. All rights reserved.
 //
 
+#import "AppDelegate.h"
+
 NS_ASSUME_NONNULL_BEGIN
-///首页
-@interface LXAHomeController : UIViewController
+
+@interface AppDelegate (ThirdSDK)
 
 @end
 

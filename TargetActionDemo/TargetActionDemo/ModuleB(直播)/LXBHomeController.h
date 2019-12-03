@@ -6,11 +6,9 @@
 //  Copyright © 2019 starxin. All rights reserved.
 //
 
-#import "LXBaseController.h"
-
 NS_ASSUME_NONNULL_BEGIN
 ///直播
-@interface LXBHomeController : LXBaseController
+@interface LXBHomeController : UIViewController
 
 @end
 

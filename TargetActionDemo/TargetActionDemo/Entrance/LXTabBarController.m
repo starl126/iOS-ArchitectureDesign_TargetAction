@@ -7,6 +7,7 @@
 //
 
 #import "LXTabBarController.h"
+#import "LXNavigationController.h"
 
 @implementation LXTabBarController
 

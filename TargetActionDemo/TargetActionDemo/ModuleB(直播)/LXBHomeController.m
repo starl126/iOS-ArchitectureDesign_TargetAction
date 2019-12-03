@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"直播";
+    self.view.lx_backgroundColor(UIColor.whiteColor);
 }
 
 @end

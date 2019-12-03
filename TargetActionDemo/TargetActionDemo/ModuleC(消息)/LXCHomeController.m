@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"消息";
+    self.view.lx_backgroundColor(UIColor.orangeColor);
 }
 
 @end

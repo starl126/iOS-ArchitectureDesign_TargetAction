@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"更多";
+    self.view.lx_backgroundColor(UIColor.whiteColor);
 }
 
 @end
