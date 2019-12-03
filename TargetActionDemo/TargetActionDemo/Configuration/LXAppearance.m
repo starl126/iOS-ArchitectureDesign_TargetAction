@@ -55,3 +55,36 @@
 }
 
 @end
+
+@interface UIViewController (PresentStyle)
+
+@end
+
+@implementation UIViewController (PresentStyle)
+
++ (void)load {
+    if (@available(iOS 13.0, *)) {
+        
+        SEL originalSel = @selector(presentViewController:animated:completion:);
+        SEL swizzledSel = @selector(LQ_presentViewController:animated:completion:);
+        
+        Method originalMethod = class_getInstanceMethod(self, originalSel);
+        Method swizzledMethod = class_getInstanceMethod(self, swizzledSel);
+        IMP swizzledImp = method_getImplementation(swizzledMethod);
+        
+        if (class_addMethod(self, originalSel, swizzledImp, method_getTypeEncoding(swizzledMethod))) {
+            class_replaceMethod(self, originalSel, swizzledImp, method_getTypeEncoding(swizzledMethod));
+        }else {
+            method_exchangeImplementations(originalMethod, swizzledMethod);
+        }
+    }
+}
+- (void)LQ_presentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void (^)(void))completion API_AVAILABLE(ios(13.0)) {
+    if (viewController.modalPresentationStyle == UIModalPresentationPageSheet || viewController.modalPresentationStyle == UIModalPresentationAutomatic) {
+        viewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+    viewController.modalPresentationCapturesStatusBarAppearance = YES;
+    [self LQ_presentViewController:viewController animated:animated completion:completion];
+}
+
+@end
