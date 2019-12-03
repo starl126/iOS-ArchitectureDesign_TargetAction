@@ -11,7 +11,7 @@
 
 #ifdef __OBJC__
 
-    #import <YYModel/YYModel.h>
+    #import <YYModel.h>
 
     #import "ProjectHeader.h"
 

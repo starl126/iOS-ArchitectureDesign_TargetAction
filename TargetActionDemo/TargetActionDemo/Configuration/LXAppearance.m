@@ -7,6 +7,7 @@
 //
 
 #import "LXAppearance.h"
+#import <objc/runtime.h>
 
 @implementation LXAppearance
 
