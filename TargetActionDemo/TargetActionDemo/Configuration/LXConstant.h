@@ -12,7 +12,8 @@
 #define kLXWeakSelf          __weak typeof(self) weakSelf = self
 #define kLXWeakObj(OBJ)      __weak typeof(OBJ) OBJ##Weak = OBJ
 #define kLXImageNamed(NAME)  [UIImage imageNamed:NAME]
-#define kLXURL(STR)          ({NSString* urlString = [STR stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLXueryAllowedCharacterSet]; \                               [NSURL URLWithString:urlString];})
+#define kLXURL(STR)          ({NSString* urlString = [STR stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];\
+                             NSURL *url = [NSURL URLWithString:urlString];(url);})
 #define kLXBlockOnMain(block) ([NSThread isMainThread] ? block() : dispatch_async(dispatch_get_main_queue(),block))
 
 #pragma mark --- 尺寸大小

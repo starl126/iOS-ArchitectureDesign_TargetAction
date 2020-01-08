@@ -34,6 +34,7 @@
 		4B9FF90222C74FBE00905548 /* NSArray+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8FB22C74FBD00905548 /* NSArray+LX.m */; };
 		4B9FF90322C74FBE00905548 /* UIView+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8FE22C74FBE00905548 /* UIView+LX.m */; };
 		4B9FF90422C74FBE00905548 /* NSDictionary+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF90022C74FBE00905548 /* NSDictionary+LX.m */; };
+		4BB5967323C57EBD0026FC51 /* LXHttpSessionTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB5967223C57EBD0026FC51 /* LXHttpSessionTask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,8 @@
 		4B9FF8FE22C74FBE00905548 /* UIView+LX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LX.m"; sourceTree = "<group>"; };
 		4B9FF8FF22C74FBE00905548 /* NSDictionary+LX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+LX.h"; sourceTree = "<group>"; };
 		4B9FF90022C74FBE00905548 /* NSDictionary+LX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+LX.m"; sourceTree = "<group>"; };
+		4BB5967123C57EBD0026FC51 /* LXHttpSessionTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpSessionTask.h; sourceTree = "<group>"; };
+		4BB5967223C57EBD0026FC51 /* LXHttpSessionTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpSessionTask.m; sourceTree = "<group>"; };
 		8ED011A835AC66ED71C7604E /* Pods_TargetActionDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TargetActionDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99E0F343DCFF333E6C9F2755 /* Pods-TargetActionDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TargetActionDemo.release.xcconfig"; path = "Target Support Files/Pods-TargetActionDemo/Pods-TargetActionDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +173,8 @@
 			children = (
 				4B9FF8D022C7421C00905548 /* LXMediator.h */,
 				4B9FF8D122C7421C00905548 /* LXMediator.m */,
+				4BB5967123C57EBD0026FC51 /* LXHttpSessionTask.h */,
+				4BB5967223C57EBD0026FC51 /* LXHttpSessionTask.m */,
 			);
 			path = Mediator;
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 				4B9FF90122C74FBE00905548 /* CALayer+LX.m in Sources */,
 				4B9FF90422C74FBE00905548 /* NSDictionary+LX.m in Sources */,
 				4B9FF8F022C7498E00905548 /* LXCHomeController.m in Sources */,
+				4BB5967323C57EBD0026FC51 /* LXHttpSessionTask.m in Sources */,
 				4B44D2952396108D00748BFC /* LXAppearance.m in Sources */,
 				4B9FF90322C74FBE00905548 /* UIView+LX.m in Sources */,
 				4B9FF88722C73A0500905548 /* AppDelegate.m in Sources */,
