@@ -50,27 +50,50 @@ typedef NS_ENUM(NSInteger, LXHttpResCodeType) {
 
 @end
 
+/// 基础层：完成会话单个请求任务对象
 @interface LXHttpSessionTask : NSObject
 
-
-/// configure session task url,method and parameters in queue
+/// 设置网络请求的url地址，method和参数,必传，必须首先设置
 - (LXHttpSessionTask* (^)(NSString* _Nullable url,NSString* _Nonnull method,id _Nullable parameters))lx_sessionUrlParameters;
 
-/// set session task header
+/// 设置'POST'网络请求的url地址和参数
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionPOSTUrlParameters;
+
+/// 设置'GET'网络请求的url地址和参数
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionGETUrlParameters;
+
+/// 设置'DELETE'网络请求的url地址和参数
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionDELETEUrlParameters;
+
+/// 设置'HEAD'网络请求的url地址和参数
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionHEADUrlParameters;
+
+/// 设置'PUT'网络请求的url地址和参数
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionPUTUrlParameters;
+
+/// 设置网络请求的header
 - (LXHttpSessionTask* (^)(NSDictionary* _Nullable header))lx_header;
 
-/// set session task's response call back
+/// 设置响应回调
 - (LXHttpSessionTask* (^)(void (^_Nullable responseCallback)(LXHttpResData* _Nullable data)))lx_resCallback;
 
+/// 设置上传进度回调
+- (LXHttpSessionTask* (^)(void (^ _Nullable uploadProgressCallback)(NSProgress* _Nonnull uploadProgress)))lx_uploadProgressCallback;
 
-/// cancel the existed session task,if no existed,do nothing
+/// 设置下载进度回调
+- (LXHttpSessionTask* (^)(void (^ _Nullable downloadProgressCallback)(NSProgress* _Nonnull downloadProgress)))lx_downloadProgressCallback;
+
+/// 取消网络请求任务
 - (LXHttpSessionTask* (^)(void))lx_cancel;
 
-/// suspend the running session task,if no any running,do nothing
+/// 暂停网络请求任务
 - (LXHttpSessionTask* (^)(void))lx_suspend;
 
-/// resume the suspend session task,if the current task dont suspend,do nothing
+/// 开始或者继续网络请求任务
 - (LXHttpSessionTask* (^)(void))lx_resume;
+
+/// 获取当前任务的request
+- (NSURLRequest* (^)(void))lx_request;
 
 @end
 

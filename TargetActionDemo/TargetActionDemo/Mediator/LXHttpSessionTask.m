@@ -7,7 +7,7 @@
 //
 
 #import "LXHttpSessionTask.h"
-#import <sys/utsname.h>
+#import "LXHttpConfigureManager.h"
 
 @implementation LXHttpResData
 
@@ -57,50 +57,31 @@
 
 @interface LXHttpSessionTask ()
 
-@property (nonatomic,strong) AFHTTPSessionManager* sessionManager;
-
-///默认的每个请求的header字段
-@property (nonatomic, strong,) NSDictionary* appInfoHeader;
-///设备的详细类型
-@property (nonatomic, copy) NSString* deviceDetailType;
-///设备信息字典
-@property (nonatomic, strong) NSDictionary* deviceDetailInfo;
+///请求配置管理器,全局单例
+@property (nonatomic, strong) LXHttpConfigureManager* configureManager;
 ///会话任务
 @property (nonatomic, strong) NSURLSessionDataTask* dataTask;
 ///网络请求
 @property (nonatomic, readonly) NSMutableURLRequest* requestM;
 ///响应回调
-@property (nonatomic, copy) void (^_Nullable responseCallback)(LXHttpResData* _Nullable data);
+@property (nonatomic, copy) void (^ _Nullable responseCallback)(LXHttpResData* _Nullable data);
+///上传进度回调
+@property (nonatomic, copy) void (^ _Nullable uploadProgressCallback)(NSProgress* _Nonnull uploadProgress);
+///下载进度回调
+@property (nonatomic, copy) void (^ _Nullable downloadProgressCallback)(NSProgress* _Nonnull downloadProgress);
 
 @end
 
 @implementation LXHttpSessionTask
 
 #pragma mark --- life cycle
+
 - (instancetype)init {
     if (self = [super init]) {
-        [self p_configRequestSerializer:NO];
-        [self p_configRequestDefaultHeader];
+        self.configureManager = [LXHttpConfigureManager defaultConfigure];
+        _requestM = [self.configureManager.lx_defaultSessionManager().requestSerializer requestWithMethod:@"POST" URLString:@"http://google.com" parameters:nil error:NULL];
     }
     return self;
-}
-///配置请求序列对象
-- (void)p_configRequestSerializer:(BOOL)formUrlLencoded {
-    
-    if (formUrlLencoded) {
-        self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        [self.sessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    }else {
-        self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-        [self.sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    }
-    _requestM = [self.sessionManager.requestSerializer requestWithMethod:@"POST" URLString:@"http://google.com" parameters:nil error:NULL];
-}
-///配置请求默认头文件
-- (void)p_configRequestDefaultHeader {
-    for (id key in self.appInfoHeader.allKeys) {
-        [self.requestM setValue:self.appInfoHeader[key] forHTTPHeaderField:key];
-    }
 }
 
 #pragma mark --- actions
@@ -108,7 +89,7 @@
     return ^(NSString* _Nullable u,NSString* _Nonnull m,id _Nullable para) {
         NSAssert(u, @"url request is empty");
         NSAssert(m, @"request method is empty");
-        
+  
         NSString* correctUrlStr = [u stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
         NSURLComponents* urlComponents = [NSURLComponents componentsWithString:correctUrlStr];
         if (para) {
@@ -129,6 +110,31 @@
         return self;
     };
 }
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionPOSTUrlParameters {
+    return ^(NSString* _Nullable u,id _Nullable para) {
+        return self.lx_sessionUrlParameters(u,@"POST", para);
+    };
+}
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionGETUrlParameters {
+    return ^(NSString* _Nullable u,id _Nullable para) {
+        return self.lx_sessionUrlParameters(u,@"GET", para);
+    };
+}
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionDELETEUrlParameters {
+    return ^(NSString* _Nullable u,id _Nullable para) {
+        return self.lx_sessionUrlParameters(u,@"DELETE", para);
+    };
+}
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionHEADUrlParameters {
+    return ^(NSString* _Nullable u,id _Nullable para) {
+        return self.lx_sessionUrlParameters(u,@"HEAD", para);
+    };
+}
+- (LXHttpSessionTask* (^)(NSString* _Nullable url,id _Nullable parameters))lx_sessionPUTUrlParameters {
+    return ^(NSString* _Nullable u,id _Nullable para) {
+        return self.lx_sessionUrlParameters(u,@"PUT", para);
+    };
+}
 - (LXHttpSessionTask* (^)(NSDictionary* _Nullable header))lx_header {
     return ^(NSDictionary* _Nullable header) {
         if (header && header.count) {
@@ -142,6 +148,18 @@
 - (LXHttpSessionTask* (^)(void (^_Nullable responseCallback)(LXHttpResData* _Nullable data)))lx_resCallback {
     return ^(void (^_Nullable responseCallback)(LXHttpResData* _Nullable data)) {
         self.responseCallback = responseCallback;
+        return self;
+    };
+}
+- (LXHttpSessionTask* (^)(void (^ _Nullable uploadProgressCallback)(NSProgress* _Nonnull uploadProgress)))lx_uploadProgressCallback {
+    return ^(void (^ _Nullable uploadProgressCallback)(NSProgress* _Nonnull uploadProgress)) {
+        self.uploadProgressCallback = uploadProgressCallback;
+        return self;
+    };
+}
+- (LXHttpSessionTask * _Nonnull (^)(void (^ _Nullable downloadProgressCallback)(NSProgress * _Nonnull downloadProgress)))lx_downloadProgressCallback {
+    return ^(void (^ _Nullable downloadProgressCallback)(NSProgress * _Nonnull downloadProgress)) {
+        self.downloadProgressCallback = downloadProgressCallback;
         return self;
     };
 }
@@ -165,10 +183,14 @@
     return ^{
         
         kLXWeakSelf;
-        self.dataTask = [self.sessionManager dataTaskWithRequest:self.requestM uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
-            
+        self.dataTask = [self.configureManager.lx_defaultSessionManager() dataTaskWithRequest:self.requestM uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+            if (weakSelf.uploadProgressCallback) {
+                weakSelf.uploadProgressCallback(uploadProgress);
+            }
         } downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
-            
+            if (weakSelf.downloadProgressCallback) {
+                weakSelf.downloadProgressCallback(downloadProgress);
+            }
         } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
             LXHttpResData* data = [LXHttpResData httpResDataWithUrl:weakSelf.requestM.URL.absoluteString data:responseObject error:error];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -182,6 +204,11 @@
             [self.dataTask resume];
         }
         return self;
+    };
+}
+- (NSURLRequest* (^)(void))lx_request {
+    return ^{
+        return self.requestM.copy;
     };
 }
 ///这里只对数组，字符串和字典，对于数组，&拼接数组元素，对于字符串，直接拼接
@@ -210,132 +237,6 @@
         }
     }
     return query.copy;
-}
-
-#pragma mark --- setter and getter
-- (AFHTTPSessionManager*)sessionManager {
-    
-    if (!_sessionManager) {
-        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-        config.timeoutIntervalForRequest = 20;
-        _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:nil sessionConfiguration:config];
-        
-        AFSecurityPolicy* securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
-        [securityPolicy setValidatesDomainName:YES];
-        securityPolicy.allowInvalidCertificates = NO;
-        _sessionManager.securityPolicy = securityPolicy;
-        
-        [_sessionManager setSessionDidReceiveAuthenticationChallengeBlock:^NSURLSessionAuthChallengeDisposition(NSURLSession* _Nonnull session, NSURLAuthenticationChallenge* _Nonnull challenge, NSURLCredential *__autoreleasing  _Nullable * _Nullable credential) {
-            
-            NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;
-            __block NSURLCredential* cred = nil;
-            
-            // 判断服务器返回的证书是否是服务器信任的
-            if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-                
-                cred = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-                if (cred) {
-                    disposition = NSURLSessionAuthChallengeUseCredential; //使用证书
-                }
-                else {
-                    disposition = NSURLSessionAuthChallengePerformDefaultHandling; // 忽略证书 默认的做法
-                }
-            }else {
-                disposition = NSURLSessionAuthChallengeCancelAuthenticationChallenge; // 取消请求,忽略证书
-            }
-            return disposition;
-            
-        }];
-        
-        /*
-         NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"client" ofType:@"cer"];
-         NSData *cerData = [NSData dataWithContentsOfFile:cerPath];
-         AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate
-         withPinnedCertificates:[NSSet setWithObjects:cerData, nil]];
-         // 是否允许自己建立的证书有效
-         securityPolicy.allowInvalidCertificates = YES;
-         // 是否设置证书上的域名和客户端请求的域名有效才能请求成功，一般证书上的域名和客户端域名是相对独立的
-         securityPolicy.validatesDomainName = NO;
-         _sessionManager.securityPolicy = securityPolicy;
-         */
-        // set responseSerializer's types
-        _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html",@"text/json",@"text/javascript",@"text/plain", @"image/jpeg",nil];
-    }
-    return _sessionManager;
-}
-- (NSDictionary *)appInfoHeader {
-    if (!_appInfoHeader) {
-        NSDictionary* appInfo = [NSBundle mainBundle].infoDictionary;
-        NSString* appName = [appInfo objectForKey:@"CFBundleDisplayName"];
-        NSString* shortVer = [appInfo objectForKey:@"CFBundleShortVersionString"];
-        NSString* os = [[UIDevice currentDevice] systemVersion];
-        NSString* userAgent = [NSString stringWithFormat:@"Mozilla/5.0 (iOS; OS/%@ AppName/%@) Version/%@ Device/%@ AppleWebKit/537.36 (KHTML, like Gecko)  Safari/537.36",os,appName,shortVer,self.deviceDetailType];
-        
-        if (![userAgent canBeConvertedToEncoding:NSASCIIStringEncoding]) {
-            NSMutableString *mutableUserAgent = [userAgent mutableCopy];
-            if (CFStringTransform((__bridge CFMutableStringRef)(mutableUserAgent), NULL, (__bridge CFStringRef)@"Any-Latin; Latin-ASCII; [:^ASCII:] Remove", false)) {
-                userAgent = mutableUserAgent;
-            }
-        }
-        _appInfoHeader = @{@"version": shortVer, @"User-Agent": userAgent};
-    }
-    return _appInfoHeader;
-}
-- (NSDictionary *)deviceDetailInfo {
-    if (!_deviceDetailInfo) {
-        _deviceDetailInfo = @{
-            @"iPhone5,1": @"iPhone 5",       @"iPhone5,2": @"iPhone 5",
-            @"iPhone5,3": @"iPhone 5c",      @"iPhone5,4": @"iPhone 5c",
-            @"iPhone6,1": @"iPhone 5s",      @"iPhone6,2": @"iPhone 5s",
-            @"iPhone7,1": @"iPhone 6 Plus",  @"iPhone7,2": @"iPhone 6",
-            @"iPhone8,1": @"iPhone 6s",      @"iPhone8,2": @"iPhone 6s Plus",
-            @"iPhone8,4": @"iPhone SE",      @"iPhone9,1": @"iPhone 7",
-            @"iPhone9,2": @"iPhone 7 Plus",  @"iPhone10,1": @"iPhone 8",
-            @"iPhone10,4": @"iPhone 8",      @"iPhone10,2": @"iPhone 8 Plus",
-            @"iPhone10,5": @"iPhone 8 Plus", @"iPhone10,3": @"iPhone X",
-            @"iPhone10,6": @"iPhone X",      @"iPhone11,2": @"iPhone XS",
-            @"iPhone11,4": @"iPhone XS Max", @"iPhone11,6": @"iPhone XS Max",
-            @"iPhone11,8": @"iPhone XR",     @"i386": @"iPhone Simulator",
-            @"x86_64": @"iPhone Simulator",  @"iPod": @"iPod Touch",
-            @"iPad1,1": @"iPad 1G",          @"iPad2,1": @"iPad 2",
-            @"iPad2,2": @"iPad 2",           @"iPad2,3": @"iPad 2",
-            @"iPad2,4": @"iPad 2",           @"iPad2,5": @"iPad Mini 1G",
-            @"iPad2,6": @"iPad Mini 1G",     @"iPad2,7": @"iPad Mini 1G",
-            @"iPad3,1": @"iPad 3",           @"iPad3,2": @"iPad 3",
-            @"iPad3,3": @"iPad 3",           @"iPad3,4": @"iPad 4",
-            @"iPad3,5": @"iPad 4",           @"iPad3,6": @"iPad 4",
-            @"iPad4,1": @"iPad Air",         @"iPad4,2": @"iPad Air",
-            @"iPad4,3": @"iPad Air",         @"iPad4,4": @"iPad Mini 2G",
-            @"iPad4,5": @"iPad Mini 2G",     @"iPad4,6": @"iPad Mini 2G",
-            @"iPad4,7": @"iPad Mini 3",      @"iPad4,8": @"iPad Mini 3",
-            @"iPad4,9": @"iPad Mini 3",      @"iPad5,1": @"iPad Mini 4",
-            @"iPad5,2": @"iPad Mini 4",      @"iPad5,3": @"iPad Air 2",
-            @"iPad5,4": @"iPad Air 2",       @"iPad6,3": @"iPad Pro 9.7",
-            @"iPad6,4": @"iPad Pro 9.7",     @"iPad6,7": @"iPad Pro 12.9",
-            @"iPad6,8": @"iPad Pro 12.9",
-        };
-    }
-    return _deviceDetailInfo;
-}
-- (NSString *)deviceDetailType {
-    if (!_deviceDetailType) {
-        
-        struct utsname deviceInfo;
-        int success = uname(&deviceInfo);
-        if (success != 0) {
-            _deviceDetailType = @"unrecognized device";
-        }
-        
-        NSString* deviceStr = [NSString stringWithCString:deviceInfo.machine encoding:NSUTF8StringEncoding];
-        
-        id obj = [self.deviceDetailInfo objectForKey:deviceStr];
-        if (obj) {
-            _deviceDetailType = obj;
-        }else {
-            _deviceDetailType = @"unknow device";
-        }
-    }
-    return _deviceDetailType;
 }
 
 @end

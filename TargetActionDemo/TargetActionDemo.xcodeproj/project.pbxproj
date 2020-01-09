@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0AD3D0A852987148D90F2292 /* Pods_TargetActionDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ED011A835AC66ED71C7604E /* Pods_TargetActionDemo.framework */; };
+		4B2361FA23C6FE7B00F7D04C /* LXHttpDefaultHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361F923C6FE7B00F7D04C /* LXHttpDefaultHeader.m */; };
+		4B2361FD23C70A6E00F7D04C /* LXHttpConfigureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361FC23C70A6E00F7D04C /* LXHttpConfigureManager.m */; };
+		4B23620023C74E3700F7D04C /* LXHttpCacheMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */; };
 		4B44D28D23960D3000748BFC /* AppDelegate+RootVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D28C23960D3000748BFC /* AppDelegate+RootVc.m */; };
 		4B44D29123960F7C00748BFC /* AppDelegate+ThirdSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D29023960F7C00748BFC /* AppDelegate+ThirdSDK.m */; };
 		4B44D2952396108D00748BFC /* LXAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D2942396108D00748BFC /* LXAppearance.m */; };
@@ -56,6 +59,12 @@
 
 /* Begin PBXFileReference section */
 		11FF751815B96EA462A8062C /* Pods-TargetActionDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TargetActionDemo.debug.xcconfig"; path = "Target Support Files/Pods-TargetActionDemo/Pods-TargetActionDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		4B2361F823C6FE7B00F7D04C /* LXHttpDefaultHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpDefaultHeader.h; sourceTree = "<group>"; };
+		4B2361F923C6FE7B00F7D04C /* LXHttpDefaultHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpDefaultHeader.m; sourceTree = "<group>"; };
+		4B2361FB23C70A6E00F7D04C /* LXHttpConfigureManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpConfigureManager.h; sourceTree = "<group>"; };
+		4B2361FC23C70A6E00F7D04C /* LXHttpConfigureManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpConfigureManager.m; sourceTree = "<group>"; };
+		4B2361FE23C74E3700F7D04C /* LXHttpCacheMediator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpCacheMediator.h; sourceTree = "<group>"; };
+		4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpCacheMediator.m; sourceTree = "<group>"; };
 		4B44D28B23960D3000748BFC /* AppDelegate+RootVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+RootVc.h"; sourceTree = "<group>"; };
 		4B44D28C23960D3000748BFC /* AppDelegate+RootVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+RootVc.m"; sourceTree = "<group>"; };
 		4B44D28E23960E1F00748BFC /* ProjectHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectHeader.h; sourceTree = "<group>"; };
@@ -175,6 +184,12 @@
 				4B9FF8D122C7421C00905548 /* LXMediator.m */,
 				4BB5967123C57EBD0026FC51 /* LXHttpSessionTask.h */,
 				4BB5967223C57EBD0026FC51 /* LXHttpSessionTask.m */,
+				4B2361F823C6FE7B00F7D04C /* LXHttpDefaultHeader.h */,
+				4B2361F923C6FE7B00F7D04C /* LXHttpDefaultHeader.m */,
+				4B2361FB23C70A6E00F7D04C /* LXHttpConfigureManager.h */,
+				4B2361FC23C70A6E00F7D04C /* LXHttpConfigureManager.m */,
+				4B2361FE23C74E3700F7D04C /* LXHttpCacheMediator.h */,
+				4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */,
 			);
 			path = Mediator;
 			sourceTree = "<group>";
@@ -575,17 +590,20 @@
 			files = (
 				4B9FF90222C74FBE00905548 /* NSArray+LX.m in Sources */,
 				4B9FF8E722C7489600905548 /* Target_ModuleE.m in Sources */,
+				4B2361FA23C6FE7B00F7D04C /* LXHttpDefaultHeader.m in Sources */,
 				4B9FF8ED22C7498000905548 /* LXBHomeController.m in Sources */,
 				4B9FF8D622C7429A00905548 /* Target_ModuleA.m in Sources */,
 				4B9FF8DA22C742DE00905548 /* Target_ModuleB.m in Sources */,
 				4B44D29123960F7C00748BFC /* AppDelegate+ThirdSDK.m in Sources */,
 				4B9FF8F622C749DC00905548 /* LXEHomeController.m in Sources */,
 				4B9FF8D222C7421C00905548 /* LXMediator.m in Sources */,
+				4B2361FD23C70A6E00F7D04C /* LXHttpConfigureManager.m in Sources */,
 				4B9FF89522C73A0700905548 /* main.m in Sources */,
 				4B9FF8F322C7499B00905548 /* LXDHomeController.m in Sources */,
 				4B9FF90122C74FBE00905548 /* CALayer+LX.m in Sources */,
 				4B9FF90422C74FBE00905548 /* NSDictionary+LX.m in Sources */,
 				4B9FF8F022C7498E00905548 /* LXCHomeController.m in Sources */,
+				4B23620023C74E3700F7D04C /* LXHttpCacheMediator.m in Sources */,
 				4BB5967323C57EBD0026FC51 /* LXHttpSessionTask.m in Sources */,
 				4B44D2952396108D00748BFC /* LXAppearance.m in Sources */,
 				4B9FF90322C74FBE00905548 /* UIView+LX.m in Sources */,
