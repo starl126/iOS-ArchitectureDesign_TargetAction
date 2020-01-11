@@ -11,6 +11,7 @@
 		4B2361FA23C6FE7B00F7D04C /* LXHttpDefaultHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361F923C6FE7B00F7D04C /* LXHttpDefaultHeader.m */; };
 		4B2361FD23C70A6E00F7D04C /* LXHttpConfigureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361FC23C70A6E00F7D04C /* LXHttpConfigureManager.m */; };
 		4B23620023C74E3700F7D04C /* LXHttpCacheMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */; };
+		4B32012523C84E2700C44E44 /* LXHttpTaskPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B32012423C84E2700C44E44 /* LXHttpTaskPool.m */; };
 		4B44D28D23960D3000748BFC /* AppDelegate+RootVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D28C23960D3000748BFC /* AppDelegate+RootVc.m */; };
 		4B44D29123960F7C00748BFC /* AppDelegate+ThirdSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D29023960F7C00748BFC /* AppDelegate+ThirdSDK.m */; };
 		4B44D2952396108D00748BFC /* LXAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D2942396108D00748BFC /* LXAppearance.m */; };
@@ -65,6 +66,8 @@
 		4B2361FC23C70A6E00F7D04C /* LXHttpConfigureManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpConfigureManager.m; sourceTree = "<group>"; };
 		4B2361FE23C74E3700F7D04C /* LXHttpCacheMediator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpCacheMediator.h; sourceTree = "<group>"; };
 		4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpCacheMediator.m; sourceTree = "<group>"; };
+		4B32012323C84E2700C44E44 /* LXHttpTaskPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpTaskPool.h; sourceTree = "<group>"; };
+		4B32012423C84E2700C44E44 /* LXHttpTaskPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpTaskPool.m; sourceTree = "<group>"; };
 		4B44D28B23960D3000748BFC /* AppDelegate+RootVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+RootVc.h"; sourceTree = "<group>"; };
 		4B44D28C23960D3000748BFC /* AppDelegate+RootVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+RootVc.m"; sourceTree = "<group>"; };
 		4B44D28E23960E1F00748BFC /* ProjectHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectHeader.h; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 				4B2361FC23C70A6E00F7D04C /* LXHttpConfigureManager.m */,
 				4B2361FE23C74E3700F7D04C /* LXHttpCacheMediator.h */,
 				4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */,
+				4B32012323C84E2700C44E44 /* LXHttpTaskPool.h */,
+				4B32012423C84E2700C44E44 /* LXHttpTaskPool.m */,
 			);
 			path = Mediator;
 			sourceTree = "<group>";
@@ -598,6 +603,7 @@
 				4B9FF8F622C749DC00905548 /* LXEHomeController.m in Sources */,
 				4B9FF8D222C7421C00905548 /* LXMediator.m in Sources */,
 				4B2361FD23C70A6E00F7D04C /* LXHttpConfigureManager.m in Sources */,
+				4B32012523C84E2700C44E44 /* LXHttpTaskPool.m in Sources */,
 				4B9FF89522C73A0700905548 /* main.m in Sources */,
 				4B9FF8F322C7499B00905548 /* LXDHomeController.m in Sources */,
 				4B9FF90122C74FBE00905548 /* CALayer+LX.m in Sources */,

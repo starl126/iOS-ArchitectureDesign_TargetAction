@@ -57,18 +57,24 @@
 
 @interface LXHttpSessionTask ()
 
-///请求配置管理器,全局单例
+/// 请求配置管理器,全局单例
 @property (nonatomic, strong) LXHttpConfigureManager* configureManager;
-///会话任务
+/// 会话任务
 @property (nonatomic, strong) NSURLSessionDataTask* dataTask;
-///网络请求
+/// 网络请求
 @property (nonatomic, readonly) NSMutableURLRequest* requestM;
-///响应回调
+/// 响应回调
 @property (nonatomic, copy) void (^ _Nullable responseCallback)(LXHttpResData* _Nullable data);
-///上传进度回调
+/// 上传进度回调
 @property (nonatomic, copy) void (^ _Nullable uploadProgressCallback)(NSProgress* _Nonnull uploadProgress);
-///下载进度回调
+/// 下载进度回调
 @property (nonatomic, copy) void (^ _Nullable downloadProgressCallback)(NSProgress* _Nonnull downloadProgress);
+
+/// 上传进度
+@property (nonatomic, strong) NSProgress* uploadProgress;
+
+/// 下载进度
+@property (nonatomic, strong) NSProgress* downloadProgress;
 
 @end
 
@@ -84,7 +90,7 @@
     return self;
 }
 
-#pragma mark --- actions
+#pragma mark --- 任务配置
 - (LXHttpSessionTask* (^)(NSString* _Nullable url,NSString* _Nonnull method,id _Nullable parameters))lx_sessionUrlParameters {
     return ^(NSString* _Nullable u,NSString* _Nonnull m,id _Nullable para) {
         NSAssert(u, @"url request is empty");
@@ -163,6 +169,8 @@
         return self;
     };
 }
+
+#pragma mark --- 任务操作
 - (LXHttpSessionTask* (^)(void))lx_cancel {
     return ^() {
         if (self.dataTask && (self.dataTask.state == NSURLSessionTaskStateRunning || self.dataTask.state == NSURLSessionTaskStateSuspended)) {
@@ -184,10 +192,12 @@
         
         kLXWeakSelf;
         self.dataTask = [self.configureManager.lx_defaultSessionManager() dataTaskWithRequest:self.requestM uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+            weakSelf.uploadProgress = uploadProgress;
             if (weakSelf.uploadProgressCallback) {
                 weakSelf.uploadProgressCallback(uploadProgress);
             }
         } downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+            weakSelf.downloadProgress = downloadProgress;
             if (weakSelf.downloadProgressCallback) {
                 weakSelf.downloadProgressCallback(downloadProgress);
             }
@@ -206,11 +216,30 @@
         return self;
     };
 }
+
+#pragma mark --- 任务状态获取
 - (NSURLRequest* (^)(void))lx_request {
     return ^{
         return self.requestM.copy;
     };
 }
+- (NSURLSessionTaskState (^)(void))lx_state {
+    return ^ {
+        return self.dataTask.state;
+    };
+}
+- (NSProgress* _Nonnull (^)(void))lx_uploadProgress {
+    return ^ {
+        return self.uploadProgress;
+    };
+}
+- (NSProgress* _Nonnull (^)(void))lx_downloadProgress {
+    return ^ {
+        return self.downloadProgress;
+    };
+}
+
+#pragma mark --- private
 ///这里只对数组，字符串和字典，对于数组，&拼接数组元素，对于字符串，直接拼接
 - (NSString*)p_actionForJoinUrlWithQuery:(id)parameters {
     NSMutableString* query = self.requestM.URL.query.mutableCopy;
@@ -237,6 +266,12 @@
         }
     }
     return query.copy;
+}
+
+- (void)dealloc {
+    self->_uploadProgressCallback = nil;
+    self->_downloadProgressCallback = nil;
+    self->_responseCallback = nil;
 }
 
 @end

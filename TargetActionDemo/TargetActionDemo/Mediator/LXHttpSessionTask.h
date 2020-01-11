@@ -53,6 +53,7 @@ typedef NS_ENUM(NSInteger, LXHttpResCodeType) {
 /// 基础层：完成会话单个请求任务对象
 @interface LXHttpSessionTask : NSObject
 
+#pragma mark --- 任务配置
 /// 设置网络请求的url地址，method和参数,必传，必须首先设置
 - (LXHttpSessionTask* (^)(NSString* _Nullable url,NSString* _Nonnull method,id _Nullable parameters))lx_sessionUrlParameters;
 
@@ -83,6 +84,7 @@ typedef NS_ENUM(NSInteger, LXHttpResCodeType) {
 /// 设置下载进度回调
 - (LXHttpSessionTask* (^)(void (^ _Nullable downloadProgressCallback)(NSProgress* _Nonnull downloadProgress)))lx_downloadProgressCallback;
 
+#pragma mark --- 任务操作
 /// 取消网络请求任务
 - (LXHttpSessionTask* (^)(void))lx_cancel;
 
@@ -92,8 +94,18 @@ typedef NS_ENUM(NSInteger, LXHttpResCodeType) {
 /// 开始或者继续网络请求任务
 - (LXHttpSessionTask* (^)(void))lx_resume;
 
+#pragma mark --- 任务状态获取
 /// 获取当前任务的request
 - (NSURLRequest* (^)(void))lx_request;
+
+/// 获取当前任务的状态
+- (NSURLSessionTaskState (^)(void))lx_state;
+
+/// 获取当前任务上传进度
+- (NSProgress* _Nonnull (^)(void))lx_uploadProgress;
+
+/// 获取当前任务下载进度
+- (NSProgress* _Nonnull (^)(void))lx_downloadProgress;
 
 @end
 
