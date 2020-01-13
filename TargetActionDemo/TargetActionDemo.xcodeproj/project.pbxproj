@@ -15,6 +15,7 @@
 		4B44D28D23960D3000748BFC /* AppDelegate+RootVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D28C23960D3000748BFC /* AppDelegate+RootVc.m */; };
 		4B44D29123960F7C00748BFC /* AppDelegate+ThirdSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D29023960F7C00748BFC /* AppDelegate+ThirdSDK.m */; };
 		4B44D2952396108D00748BFC /* LXAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D2942396108D00748BFC /* LXAppearance.m */; };
+		4B6E265623CC0A9A00091815 /* LXHttpBLLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6E265523CC0A9A00091815 /* LXHttpBLLHandler.m */; };
 		4B9FF88722C73A0500905548 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF88622C73A0500905548 /* AppDelegate.m */; };
 		4B9FF88F22C73A0700905548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B9FF88E22C73A0700905548 /* Assets.xcassets */; };
 		4B9FF89222C73A0700905548 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B9FF89022C73A0700905548 /* LaunchScreen.storyboard */; };
@@ -76,6 +77,8 @@
 		4B44D2922396102A00748BFC /* LXConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXConstant.h; sourceTree = "<group>"; };
 		4B44D2932396108D00748BFC /* LXAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXAppearance.h; sourceTree = "<group>"; };
 		4B44D2942396108D00748BFC /* LXAppearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXAppearance.m; sourceTree = "<group>"; };
+		4B6E265423CC0A9A00091815 /* LXHttpBLLHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpBLLHandler.h; sourceTree = "<group>"; };
+		4B6E265523CC0A9A00091815 /* LXHttpBLLHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpBLLHandler.m; sourceTree = "<group>"; };
 		4B9FF88222C73A0500905548 /* TargetActionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TargetActionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B9FF88522C73A0500905548 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4B9FF88622C73A0500905548 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 				4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */,
 				4B32012323C84E2700C44E44 /* LXHttpTaskPool.h */,
 				4B32012423C84E2700C44E44 /* LXHttpTaskPool.m */,
+				4B6E265423CC0A9A00091815 /* LXHttpBLLHandler.h */,
+				4B6E265523CC0A9A00091815 /* LXHttpBLLHandler.m */,
 			);
 			path = Mediator;
 			sourceTree = "<group>";
@@ -602,6 +607,7 @@
 				4B44D29123960F7C00748BFC /* AppDelegate+ThirdSDK.m in Sources */,
 				4B9FF8F622C749DC00905548 /* LXEHomeController.m in Sources */,
 				4B9FF8D222C7421C00905548 /* LXMediator.m in Sources */,
+				4B6E265623CC0A9A00091815 /* LXHttpBLLHandler.m in Sources */,
 				4B2361FD23C70A6E00F7D04C /* LXHttpConfigureManager.m in Sources */,
 				4B32012523C84E2700C44E44 /* LXHttpTaskPool.m in Sources */,
 				4B9FF89522C73A0700905548 /* main.m in Sources */,

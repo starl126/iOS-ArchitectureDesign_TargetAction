@@ -7,8 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-@class LXHttpSessionTask, LXHttpResData;
+#import "LXHttpSessionTask.h"
+
 NS_ASSUME_NONNULL_BEGIN
+
+/// 响应回调Block定义
+typedef void (^LXHttpResponseCallback)(LXHttpResData* _Nullable);
+/// 上传实时回调Block定义
+typedef void (^LXHttpUploadProgressCallback)(NSProgress* _Nonnull);
+/// 下载实时回调Block定义
+typedef void (^LXHttpDownloadProgressCallback)(NSProgress* _Nonnull);
 
 @interface LXHttpTaskModel : NSObject
 
@@ -16,6 +24,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nonnull) NSString* identifier;
 ///当前任务
 @property (nonatomic, strong, nonnull) LXHttpSessionTask* dataTask;
+
+
+
+/// 初始化方法,依次传入url地址、参数和Method
++ (LXHttpTaskModel* (^)(NSString* _Nonnull url,id _Nullable parameters,NSString* method))lx_init;
+
+/// 设置响应回调
+- (LXHttpTaskModel* (^)(LXHttpResponseCallback _Nullable resCallback))lx_responseCallback;
+
+/// 设置上传实时回调
+- (LXHttpTaskModel* (^)(LXHttpUploadProgressCallback _Nullable uploadProgressCallback))lx_uploadProgressCallback;
+
+/// 设置下载实时回调
+- (LXHttpTaskModel* (^)(LXHttpDownloadProgressCallback _Nullable downloadProgressCallback))lx_downloadProgressCallback;
 
 @end
 
@@ -47,6 +69,18 @@ typedef NS_ENUM(NSInteger, LXTaskCRUDResultType) {
     LXTaskCRUDResultTypeNotExist = -200
 };
 
+/// 任务池CRUD操作状态回调
+typedef void (^LXPoolTaskCRUDStateCallback)(NSString* _Nonnull msg, LXTaskCRUDResultType code,LXHttpTaskModel* _Nullable task);
+
+/// 任务池任务完成回调
+typedef void (^LXPoolTaskCompletedCallback)(LXHttpTaskModel* _Nonnull task, LXHttpResData* resData);
+
+/// 任务池上传实时回调
+typedef void (^LXPoolTaskUploadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress);
+
+/// 任务池下载实时回调
+typedef void (^LXPoolTaskDownloadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress);
+
 /// 任务队列管理池：进行中任务池、等待中任务池和暂停任务池,可进行进行中任务池最大数和等待中任务池最大数限制
 @interface LXHttpTaskPool : NSObject
 
@@ -58,6 +92,7 @@ typedef NS_ENUM(NSInteger, LXTaskCRUDResultType) {
 - (LXHttpTaskPool* (^)(NSUInteger maxWaitingTaskCount))lx_maxWaitingTaskCount;
 
 #pragma mark --- 任务池CRUD
+
 /// 添加任务并根据进行中的任务决定是否执行，遵循‘FIFO’原则
 - (LXHttpTaskPool* (^)(LXHttpTaskModel* _Nonnull task))lx_addTask;
 
@@ -93,18 +128,18 @@ typedef NS_ENUM(NSInteger, LXTaskCRUDResultType) {
 /// 判断指定标识任务是否存在于任务池中
 - (BOOL (^)(NSString* _Nonnull taskIdentifier))lx_identifierTaskExist;
 
+#pragma mark --- 任务池任务状态回调
 /// 任务池CRUD状态回调
-- (LXHttpTaskPool* (^)(void (^_Nullable taskPoolActionCallback)(NSString* msg, LXTaskCRUDResultType code)))lx_taskPoolActionCallback;
+- (LXHttpTaskPool* (^)(LXPoolTaskCRUDStateCallback _Nullable stateCallback))lx_taskPoolActionCallback;
 
-#pragma mark --- 任务池任务进行情况回调
 /// 任务请求完成回调
-- (LXHttpTaskPool* (^)(void (^taskCompletedCallback)(LXHttpTaskModel* _Nonnull task, LXHttpResData* resData)))lx_taskCompletedCallBack;
+- (LXHttpTaskPool* (^)(LXPoolTaskCompletedCallback _Nullable completedCallback))lx_taskCompletedCallBack;
 
 /// 任务上传实时回调
-- (LXHttpTaskPool* (^)(void (^taskUploadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress)))lx_taskUploadProgressCallback;
+- (LXHttpTaskPool* (^)(LXPoolTaskUploadProgressCallback _Nullable uploadProgress))lx_taskUploadProgressCallback;
 
 /// 任务下载实时回调
-- (LXHttpTaskPool* (^)(void (^taskDownloadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress)))lx_taskDownloadProgressCallback;
+- (LXHttpTaskPool* (^)(LXPoolTaskDownloadProgressCallback _Nullable downloadProgress))lx_taskDownloadProgressCallback;
 
 @end
 
