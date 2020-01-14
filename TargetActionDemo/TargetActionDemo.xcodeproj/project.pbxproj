@@ -10,7 +10,7 @@
 		0AD3D0A852987148D90F2292 /* Pods_TargetActionDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ED011A835AC66ED71C7604E /* Pods_TargetActionDemo.framework */; };
 		4B2361FA23C6FE7B00F7D04C /* LXHttpDefaultHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361F923C6FE7B00F7D04C /* LXHttpDefaultHeader.m */; };
 		4B2361FD23C70A6E00F7D04C /* LXHttpConfigureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361FC23C70A6E00F7D04C /* LXHttpConfigureManager.m */; };
-		4B23620023C74E3700F7D04C /* LXHttpCacheMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */; };
+		4B23620023C74E3700F7D04C /* LXHttpCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2361FF23C74E3700F7D04C /* LXHttpCacheTool.m */; };
 		4B32012523C84E2700C44E44 /* LXHttpTaskPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B32012423C84E2700C44E44 /* LXHttpTaskPool.m */; };
 		4B44D28D23960D3000748BFC /* AppDelegate+RootVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D28C23960D3000748BFC /* AppDelegate+RootVc.m */; };
 		4B44D29123960F7C00748BFC /* AppDelegate+ThirdSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B44D29023960F7C00748BFC /* AppDelegate+ThirdSDK.m */; };
@@ -65,8 +65,8 @@
 		4B2361F923C6FE7B00F7D04C /* LXHttpDefaultHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpDefaultHeader.m; sourceTree = "<group>"; };
 		4B2361FB23C70A6E00F7D04C /* LXHttpConfigureManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpConfigureManager.h; sourceTree = "<group>"; };
 		4B2361FC23C70A6E00F7D04C /* LXHttpConfigureManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpConfigureManager.m; sourceTree = "<group>"; };
-		4B2361FE23C74E3700F7D04C /* LXHttpCacheMediator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpCacheMediator.h; sourceTree = "<group>"; };
-		4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpCacheMediator.m; sourceTree = "<group>"; };
+		4B2361FE23C74E3700F7D04C /* LXHttpCacheTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpCacheTool.h; sourceTree = "<group>"; };
+		4B2361FF23C74E3700F7D04C /* LXHttpCacheTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpCacheTool.m; sourceTree = "<group>"; };
 		4B32012323C84E2700C44E44 /* LXHttpTaskPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpTaskPool.h; sourceTree = "<group>"; };
 		4B32012423C84E2700C44E44 /* LXHttpTaskPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpTaskPool.m; sourceTree = "<group>"; };
 		4B44D28B23960D3000748BFC /* AppDelegate+RootVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+RootVc.h"; sourceTree = "<group>"; };
@@ -194,8 +194,8 @@
 				4B2361F923C6FE7B00F7D04C /* LXHttpDefaultHeader.m */,
 				4B2361FB23C70A6E00F7D04C /* LXHttpConfigureManager.h */,
 				4B2361FC23C70A6E00F7D04C /* LXHttpConfigureManager.m */,
-				4B2361FE23C74E3700F7D04C /* LXHttpCacheMediator.h */,
-				4B2361FF23C74E3700F7D04C /* LXHttpCacheMediator.m */,
+				4B2361FE23C74E3700F7D04C /* LXHttpCacheTool.h */,
+				4B2361FF23C74E3700F7D04C /* LXHttpCacheTool.m */,
 				4B32012323C84E2700C44E44 /* LXHttpTaskPool.h */,
 				4B32012423C84E2700C44E44 /* LXHttpTaskPool.m */,
 				4B6E265423CC0A9A00091815 /* LXHttpBLLHandler.h */,
@@ -615,7 +615,7 @@
 				4B9FF90122C74FBE00905548 /* CALayer+LX.m in Sources */,
 				4B9FF90422C74FBE00905548 /* NSDictionary+LX.m in Sources */,
 				4B9FF8F022C7498E00905548 /* LXCHomeController.m in Sources */,
-				4B23620023C74E3700F7D04C /* LXHttpCacheMediator.m in Sources */,
+				4B23620023C74E3700F7D04C /* LXHttpCacheTool.m in Sources */,
 				4BB5967323C57EBD0026FC51 /* LXHttpSessionTask.m in Sources */,
 				4B44D2952396108D00748BFC /* LXAppearance.m in Sources */,
 				4B9FF90322C74FBE00905548 /* UIView+LX.m in Sources */,

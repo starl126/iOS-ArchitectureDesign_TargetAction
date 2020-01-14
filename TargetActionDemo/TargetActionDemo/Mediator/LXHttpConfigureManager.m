@@ -172,4 +172,8 @@
     return _customizedSessionManager;
 }
 
+- (void)dealloc {
+    LXLog(@"dealloc --- %@", NSStringFromClass(self.class));
+}
+
 @end

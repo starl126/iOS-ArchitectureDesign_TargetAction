@@ -545,31 +545,34 @@
     };
 }
 
+#pragma mark --- 任务池任务状态回调
 - (LXHttpTaskPool * _Nonnull (^)(LXPoolTaskCRUDStateCallback _Nullable stateCallback))lx_taskPoolActionCallback {
     return ^(LXPoolTaskCRUDStateCallback _Nullable stateCallback) {
         self.stateCallback = stateCallback;
         return self;
     };
 }
+- (LXHttpTaskPool* (^)(LXPoolTaskCompletedCallback _Nullable completedCallback))lx_taskCompletedCallBack {
+    return ^(LXPoolTaskCompletedCallback _Nullable completedCallback) {
+        self.completedCallback = completedCallback;
+        return self;
+    };
+}
+- (LXHttpTaskPool* (^)(LXPoolTaskUploadProgressCallback _Nullable uploadProgress))lx_taskUploadProgressCallback {
+    return ^(LXPoolTaskUploadProgressCallback _Nullable uploadProgress) {
+        self.uploadProgressCallback = uploadProgress;
+        return self;
+    };
+}
+- (LXHttpTaskPool* (^)(LXPoolTaskDownloadProgressCallback _Nullable downloadProgress))lx_taskDownloadProgressCallback {
+    return ^(LXPoolTaskDownloadProgressCallback _Nullable downloadProgress) {
+        self.downloadProgressCallback = downloadProgress;
+        return self;
+    };
+}
 
-#pragma mark --- 任务池任务进行情况回调
-- (LXHttpTaskPool* (^)(void (^taskCompletedCallback)(LXHttpTaskModel* _Nonnull task,LXHttpResData* resData)))lx_taskCompletedCallBack {
-    return ^(void (^taskCompletedCallback)(LXHttpTaskModel* _Nonnull task,LXHttpResData* resData)) {
-        self.completedCallback = taskCompletedCallback;
-        return self;
-    };
-}
-- (LXHttpTaskPool* (^)(void (^taskUploadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress)))lx_taskUploadProgressCallback {
-    return ^(void (^taskUploadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress)) {
-        self.uploadProgressCallback = taskUploadProgressCallback;
-        return self;
-    };
-}
-- (LXHttpTaskPool* (^)(void (^taskDownloadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress)))lx_taskDownloadProgressCallback {
-    return ^(void (^taskDownloadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress)) {
-        self.downloadProgressCallback = taskDownloadProgressCallback;
-        return self;
-    };
+- (void)dealloc {
+    LXLog(@"dealloc --- %@", NSStringFromClass(self.class));
 }
 
 @end

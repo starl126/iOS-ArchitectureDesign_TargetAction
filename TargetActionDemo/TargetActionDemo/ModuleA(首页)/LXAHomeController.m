@@ -7,6 +7,7 @@
 //
 
 #import "LXAHomeController.h"
+#import "LXHttpBLLHandler.h"
 
 @interface LXAHomeController ()
 
@@ -20,7 +21,9 @@
     self.navigationItem.title = @"首页";
     self.view.lx_backgroundColor(UIColor.lightGrayColor);
 }
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+ 
+}
 
 
 @end

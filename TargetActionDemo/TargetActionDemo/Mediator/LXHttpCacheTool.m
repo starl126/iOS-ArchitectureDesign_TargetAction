@@ -6,17 +6,17 @@
 //  Copyright © 2020 starxin. All rights reserved.
 //
 
-#import "LXHttpCacheMediator.h"
+#import "LXHttpCacheTool.h"
 #import <CommonCrypto/CommonDigest.h>
 
 #define kLXHttpMemoryCacheSize 5*1024*1024
 #define kLXHttpDiskCacheSize   30*1024*1024
 
-@interface LXHttpCacheMediator ()
+@interface LXHttpCacheTool ()
 
 @end
 
-@implementation LXHttpCacheMediator
+@implementation LXHttpCacheTool
 
 #pragma mark --- life cycle
 - (instancetype)init {
@@ -31,13 +31,13 @@
 }
 
 #pragma mark --- actions
-- (LXHttpCacheMediator* (^)(NSURLRequest* _Nonnull request, NSData* _Nonnull data))lx_saveCacheForRequest {
+- (LXHttpCacheTool* (^)(NSURLRequest* _Nonnull request, NSData* _Nonnull data))lx_saveCacheForRequest {
     return ^(NSURLRequest* _Nonnull request, NSData* _Nonnull data) {
         [self p_actionForSaveUrlCacheInRequest:request data:data];
         return self;
     };
 }
-- (LXHttpCacheMediator* (^)(NSArray<NSURLRequest*>* _Nonnull requests, NSArray<NSData*>* datas))lx_saveCacheForRequests {
+- (LXHttpCacheTool* (^)(NSArray<NSURLRequest*>* _Nonnull requests, NSArray<NSData*>* datas))lx_saveCacheForRequests {
     return ^(NSArray<NSURLRequest*>* _Nonnull requests, NSArray<NSData*>* datas) {
         NSAssert(requests && datas && requests.count && datas.count, @"保存缓存时，requests或者datas任何一方为空");
         NSAssert(requests.count == datas.count, @"保存缓存时，requests或者datas的对象数目不一致");
@@ -48,14 +48,14 @@
         return self;
     };
 }
-- (LXHttpCacheMediator* (^)(NSURLRequest* _Nonnull request))lx_deleteCacheForRequest {
+- (LXHttpCacheTool* (^)(NSURLRequest* _Nonnull request))lx_deleteCacheForRequest {
     return ^(NSURLRequest* _Nonnull request) {
         NSURLRequest* correctRequest = [self p_actionForCorrectRequest:request];
         [NSURLCache.sharedURLCache removeCachedResponseForRequest:correctRequest];
         return self;
     };
 }
-- (LXHttpCacheMediator* (^)(NSArray<NSURLRequest*>* _Nonnull requests))lx_deleteCacheForRequests {
+- (LXHttpCacheTool* (^)(NSArray<NSURLRequest*>* _Nonnull requests))lx_deleteCacheForRequests {
     return ^(NSArray<NSURLRequest*>* _Nonnull requests) {
         for (NSUInteger i=0; i<requests.count; i++) {
             NSURLRequest* correctRequest = [self p_actionForCorrectRequest:requests[i]];
@@ -64,7 +64,7 @@
         return self;
     };
 }
-- (LXHttpCacheMediator* (^)(void))lx_deleteAllCache {
+- (LXHttpCacheTool* (^)(void))lx_deleteAllCache {
     return ^ {
         [NSURLCache.sharedURLCache removeAllCachedResponses];
         return self;
@@ -116,7 +116,7 @@
     NSData* httpBody = oriRequest.HTTPBody;
     NSString* correctUrl = oriRequest.URL.absoluteURL.mutableCopy;
     if (httpBody && httpBody.length) {
-        NSString* correctBodyStr = [LXHttpCacheMediator p_MD5ForData:httpBody];
+        NSString* correctBodyStr = [LXHttpCacheTool p_MD5ForData:httpBody];
         correctUrl = [correctUrl stringByAppendingFormat:@"?%@", correctBodyStr];
     }
     NSURLRequest* request = [[NSURLRequest alloc] initWithURL:kLXURL(correctUrl)];
@@ -132,6 +132,10 @@
            result[8], result[9], result[10], result[11],
            result[12], result[13], result[14], result[15]
            ];
+}
+
+- (void)dealloc {
+    LXLog(@"dealloc --- %@", NSStringFromClass(self.class));
 }
 
 @end

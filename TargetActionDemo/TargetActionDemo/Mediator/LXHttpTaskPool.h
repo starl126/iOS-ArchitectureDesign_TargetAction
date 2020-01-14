@@ -20,9 +20,9 @@ typedef void (^LXHttpDownloadProgressCallback)(NSProgress* _Nonnull);
 
 @interface LXHttpTaskModel : NSObject
 
-///任务的唯一标识符
+/// 任务的唯一标识符
 @property (nonatomic, copy, nonnull) NSString* identifier;
-///当前任务
+/// 当前任务
 @property (nonatomic, strong, nonnull) LXHttpSessionTask* dataTask;
 
 
@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger, LXTaskCRUDResultType) {
 typedef void (^LXPoolTaskCRUDStateCallback)(NSString* _Nonnull msg, LXTaskCRUDResultType code,LXHttpTaskModel* _Nullable task);
 
 /// 任务池任务完成回调
-typedef void (^LXPoolTaskCompletedCallback)(LXHttpTaskModel* _Nonnull task, LXHttpResData* resData);
+typedef void (^LXPoolTaskCompletedCallback)(LXHttpTaskModel* _Nullable task, LXHttpResData* resData);
 
 /// 任务池上传实时回调
 typedef void (^LXPoolTaskUploadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress);
@@ -81,7 +81,7 @@ typedef void (^LXPoolTaskUploadProgressCallback)(LXHttpTaskModel* _Nonnull task,
 /// 任务池下载实时回调
 typedef void (^LXPoolTaskDownloadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress);
 
-/// 任务队列管理池：进行中任务池、等待中任务池和暂停任务池,可进行进行中任务池最大数和等待中任务池最大数限制
+/// 中间层: 任务队列管理池：进行中任务池、等待中任务池和暂停任务池,可进行进行中任务池最大数和等待中任务池最大数限制
 @interface LXHttpTaskPool : NSObject
 
 #pragma mark --- 任务池配置

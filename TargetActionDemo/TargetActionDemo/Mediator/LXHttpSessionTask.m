@@ -272,6 +272,7 @@
     self->_uploadProgressCallback = nil;
     self->_downloadProgressCallback = nil;
     self->_responseCallback = nil;
+    LXLog(@"dealloc --- %@", NSStringFromClass(self.class));
 }
 
 @end
