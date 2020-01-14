@@ -497,7 +497,7 @@
     
     return NO;
 }
-- (void)p_actionForCompletedTask:(LXHttpTaskModel*)task responseData:(LXHttpResData*)responseData {
+- (void)p_actionForCompletedTask:(LXHttpTaskModel*)task response:(NSURLResponse*)response responseObject:(id)responseObj error:(NSError*)error {
     LXHttpTaskModel* _task = task;
     [self.runningTaskPool removeObject:_task];
     if (self.waitingTaskPool && self.waitingTaskPool.count) {
@@ -507,7 +507,7 @@
     }
     
     if (self.completedCallback) {
-        self.completedCallback(_task, responseData);
+        self.completedCallback(_task, response, responseObj, error);
     }
 }
 - (void)p_actionForUploadProgressTask:(LXHttpTaskModel*)task progress:(NSProgress*)uploadProgress {
@@ -522,8 +522,8 @@
 }
 - (void)p_actionForConfigureTaskCallback:(LXHttpTaskModel*)task {
     kLXWeakSelf;
-    task.dataTask.lx_resCallback(^ (LXHttpResData* data) {
-        [weakSelf p_actionForCompletedTask:task responseData:data];
+    task.dataTask.lx_resCallback(^(NSURLResponse* _Nonnull response, id _Nullable responseObject, NSError* _Nullable error) {
+        [weakSelf p_actionForCompletedTask:task response:response responseObject:responseObject error:error];
     })
     .lx_uploadProgressCallback(^ (NSProgress* uploadProgress) {
         [weakSelf p_actionForUploadProgressTask:task progress:uploadProgress];

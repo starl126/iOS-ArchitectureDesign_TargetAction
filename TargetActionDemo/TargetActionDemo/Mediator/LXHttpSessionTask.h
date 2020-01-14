@@ -10,45 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, LXHttpResCodeType) {
-    
-#pragma mark --- 通用应用层码
-    /** 请求失败 */
-    LXHttpResCodeTypeFailure = -1,
-    /** 系统错误 */
-    LXHttpResCodeTypeSystemError = -100,
-    /** 成功 */
-    LXHttpResCodeTypeSuccess = 0,
-    /** 登录过期 */
-    LXHttpResCodeTypeTokenExpired = 103,
-    /** 参数异常，鉴权失败 */
-    LXHttpResCodeTypeParaIllegal = 109,
-    
-#pragma mark --- 网络层码
-    /** 网络链接失败 */
-    LXHttpResCodeTypeDisconnect = -500,
-    /** 网络请求超时 */
-    LXHttpResCodeTypeTimeOut = -1001,
-    /** 手动取消任务 */
-    LXHttpResCodeTypeCancelTask = -999,
-};
-
-@interface LXHttpResData: NSObject
-
-/** 原始数据 */
-@property (nonatomic, readonly) NSDictionary* originInfo;
-/** 状态码 */
-@property (nonatomic, readonly) NSInteger code;
-/** 响应数据 */
-@property (nonatomic, strong, readonly) id data;
-/** 服务器返回消息 */
-@property (nonatomic, readonly) NSString* msg;
-/** 请求地址 */
-@property (nonatomic, readonly) NSString* urlStr;
-
-+ (instancetype)httpResDataWithUrl:(NSString*)url data:(id _Nullable)data error:(NSError *_Nullable)error;
-
-@end
+/// 响应回调Block定义
+typedef void (^LXHttpResponseCallback)(NSURLResponse* _Nonnull response, id _Nullable responseObject, NSError* _Nullable error);
+/// 上传实时回调Block定义
+typedef void (^LXHttpUploadProgressCallback)(NSProgress* _Nonnull);
+/// 下载实时回调Block定义
+typedef void (^LXHttpDownloadProgressCallback)(NSProgress* _Nonnull);
 
 /// 基础层：完成会话单个请求任务对象
 @interface LXHttpSessionTask : NSObject
@@ -76,13 +43,13 @@ typedef NS_ENUM(NSInteger, LXHttpResCodeType) {
 - (LXHttpSessionTask* (^)(NSDictionary* _Nullable header))lx_header;
 
 /// 设置响应回调
-- (LXHttpSessionTask* (^)(void (^_Nullable responseCallback)(LXHttpResData* _Nullable data)))lx_resCallback;
+- (LXHttpSessionTask* (^)(LXHttpResponseCallback _Nullable resCallback))lx_resCallback;
 
 /// 设置上传进度回调
-- (LXHttpSessionTask* (^)(void (^ _Nullable uploadProgressCallback)(NSProgress* _Nonnull uploadProgress)))lx_uploadProgressCallback;
+- (LXHttpSessionTask* (^)(LXHttpUploadProgressCallback _Nullable uploadProgress))lx_uploadProgressCallback;
 
 /// 设置下载进度回调
-- (LXHttpSessionTask* (^)(void (^ _Nullable downloadProgressCallback)(NSProgress* _Nonnull downloadProgress)))lx_downloadProgressCallback;
+- (LXHttpSessionTask* (^)(LXHttpDownloadProgressCallback _Nullable downloadProgress))lx_downloadProgressCallback;
 
 #pragma mark --- 任务操作
 /// 取消网络请求任务

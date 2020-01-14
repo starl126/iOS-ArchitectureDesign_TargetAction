@@ -114,7 +114,7 @@
 /// 校正request，采用url地址+'?'+参数的MD5
 - (NSURLRequest*)p_actionForCorrectRequest:(NSURLRequest*)oriRequest {
     NSData* httpBody = oriRequest.HTTPBody;
-    NSString* correctUrl = oriRequest.URL.absoluteURL.mutableCopy;
+    NSString* correctUrl = oriRequest.URL.absoluteString.mutableCopy;
     if (httpBody && httpBody.length) {
         NSString* correctBodyStr = [LXHttpCacheTool p_MD5ForData:httpBody];
         correctUrl = [correctUrl stringByAppendingFormat:@"?%@", correctBodyStr];

@@ -11,20 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 响应回调Block定义
-typedef void (^LXHttpResponseCallback)(LXHttpResData* _Nullable);
-/// 上传实时回调Block定义
-typedef void (^LXHttpUploadProgressCallback)(NSProgress* _Nonnull);
-/// 下载实时回调Block定义
-typedef void (^LXHttpDownloadProgressCallback)(NSProgress* _Nonnull);
-
 @interface LXHttpTaskModel : NSObject
 
 /// 任务的唯一标识符
 @property (nonatomic, copy, nonnull) NSString* identifier;
 /// 当前任务
 @property (nonatomic, strong, nonnull) LXHttpSessionTask* dataTask;
-
 
 
 /// 初始化方法,依次传入url地址、参数和Method
@@ -73,7 +65,7 @@ typedef NS_ENUM(NSInteger, LXTaskCRUDResultType) {
 typedef void (^LXPoolTaskCRUDStateCallback)(NSString* _Nonnull msg, LXTaskCRUDResultType code,LXHttpTaskModel* _Nullable task);
 
 /// 任务池任务完成回调
-typedef void (^LXPoolTaskCompletedCallback)(LXHttpTaskModel* _Nullable task, LXHttpResData* resData);
+typedef void (^LXPoolTaskCompletedCallback)(LXHttpTaskModel* _Nonnull task, NSURLResponse* _Nonnull response, id _Nullable responseObject, NSError* _Nullable error);
 
 /// 任务池上传实时回调
 typedef void (^LXPoolTaskUploadProgressCallback)(LXHttpTaskModel* _Nonnull task, NSProgress* _Nonnull progress);

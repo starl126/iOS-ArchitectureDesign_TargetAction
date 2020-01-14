@@ -9,52 +9,6 @@
 #import "LXHttpSessionTask.h"
 #import "LXHttpConfigureManager.h"
 
-@implementation LXHttpResData
-
-+ (instancetype)httpResDataWithUrl:(NSString*)url data:(id _Nullable)data error:(NSError *_Nullable)error {
-    return [[self alloc] initWithUrl:url data:data error:error];
-}
-- (instancetype)initWithUrl:(NSString *)url data:(id)data error:(NSError *)error {
-    if (self = [super init]) {
-        
-        _urlStr = url.copy;
-        if (error) {
-            _code = error.code;
-            if (error.code == LXHttpResCodeTypeTimeOut) {
-                _msg = @"网络请求超时";
-            }else if (error.code == LXHttpResCodeTypeDisconnect) {
-                _msg = @"网络连接断开，请核实";
-            }else if (error.code == LXHttpResCodeTypeCancelTask) {
-                _msg = @"取消了网络请求";
-            }else {
-                _msg = @"未知错误";
-            }
-        }else {
-            if ([data isKindOfClass:NSDictionary.class]) {
-                _originInfo = data;
-                _data = data[@"data"];
-                _msg = data[@"msg"];
-                
-                if (data[@"code"]) {
-                    _code = [data[@"code"] integerValue];
-                }else if (data[@"status"]) {
-                    _code = [data[@"status"] integerValue];
-                }else {
-                    _code = -1;
-                }
-            }else {
-                _code = -1;
-                _msg = @"未知错误";
-                LXLog(@"接口: %@ 返回异常结构数据", url);
-            }
-        }
-    }
-    return self;
-}
-
-@end
-
-
 @interface LXHttpSessionTask ()
 
 /// 请求配置管理器,全局单例
@@ -64,11 +18,11 @@
 /// 网络请求
 @property (nonatomic, readonly) NSMutableURLRequest* requestM;
 /// 响应回调
-@property (nonatomic, copy) void (^ _Nullable responseCallback)(LXHttpResData* _Nullable data);
+@property (nonatomic, copy, nullable) LXHttpResponseCallback responseCallback;
 /// 上传进度回调
-@property (nonatomic, copy) void (^ _Nullable uploadProgressCallback)(NSProgress* _Nonnull uploadProgress);
+@property (nonatomic, copy, nullable) LXHttpUploadProgressCallback uploadProgressCallback;
 /// 下载进度回调
-@property (nonatomic, copy) void (^ _Nullable downloadProgressCallback)(NSProgress* _Nonnull downloadProgress);
+@property (nonatomic, copy, nullable) LXHttpDownloadProgressCallback downloadProgressCallback;
 
 /// 上传进度
 @property (nonatomic, strong) NSProgress* uploadProgress;
@@ -151,20 +105,20 @@
         return self;
     };
 }
-- (LXHttpSessionTask* (^)(void (^_Nullable responseCallback)(LXHttpResData* _Nullable data)))lx_resCallback {
-    return ^(void (^_Nullable responseCallback)(LXHttpResData* _Nullable data)) {
-        self.responseCallback = responseCallback;
+- (LXHttpSessionTask* (^)(LXHttpResponseCallback _Nullable resCallback))lx_resCallback {
+    return ^(LXHttpResponseCallback _Nullable resCallback) {
+        self.responseCallback = resCallback;
         return self;
     };
 }
-- (LXHttpSessionTask* (^)(void (^ _Nullable uploadProgressCallback)(NSProgress* _Nonnull uploadProgress)))lx_uploadProgressCallback {
-    return ^(void (^ _Nullable uploadProgressCallback)(NSProgress* _Nonnull uploadProgress)) {
+- (LXHttpSessionTask* (^)(LXHttpUploadProgressCallback _Nullable uploadProgress))lx_uploadProgressCallback {
+    return ^(LXHttpUploadProgressCallback uploadProgressCallback) {
         self.uploadProgressCallback = uploadProgressCallback;
         return self;
     };
 }
-- (LXHttpSessionTask * _Nonnull (^)(void (^ _Nullable downloadProgressCallback)(NSProgress * _Nonnull downloadProgress)))lx_downloadProgressCallback {
-    return ^(void (^ _Nullable downloadProgressCallback)(NSProgress * _Nonnull downloadProgress)) {
+- (LXHttpSessionTask* (^)(LXHttpDownloadProgressCallback _Nullable downloadProgress))lx_downloadProgressCallback {
+    return ^(LXHttpDownloadProgressCallback downloadProgressCallback) {
         self.downloadProgressCallback = downloadProgressCallback;
         return self;
     };
@@ -202,12 +156,9 @@
                 weakSelf.downloadProgressCallback(downloadProgress);
             }
         } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-            LXHttpResData* data = [LXHttpResData httpResDataWithUrl:weakSelf.requestM.URL.absoluteString data:responseObject error:error];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (weakSelf.responseCallback) {
-                    weakSelf.responseCallback(data);
-                }
-            });
+            if (weakSelf.responseCallback) {
+                weakSelf.responseCallback(response,responseObject,error);
+            }
         }];
         NSAssert(self.dataTask, @"session data task is empty");
         if (self.dataTask) {

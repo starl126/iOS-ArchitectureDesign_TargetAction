@@ -26,8 +26,8 @@
     self.sessionTask = [LXHttpSessionTask new];
     NSString* url = @"http://www.kuaidi100.com/query?type=shentong&postid=234444";
     self.sessionTask.lx_sessionUrlParameters(url,@"GET",nil)
-    .lx_resCallback(^(LXHttpResData* data) {
-        NSLog(@"data = %@", data);
+    .lx_resCallback(^(NSURLResponse* _Nonnull response, id _Nullable responseObject, NSError* _Nullable error) {
+        NSLog(@"data = %@", responseObject);
     })
     .lx_resume()
     .lx_uploadProgressCallback(^(NSProgress* uploadProgress) {
