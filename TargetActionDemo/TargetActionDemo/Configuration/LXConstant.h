@@ -35,10 +35,14 @@
 #define kLXNumberFont(FONT)   [UIFont fontWithName:@"Futura" size:FONT+kLXAdaptiveFont]
 
 #pragma mark --- 设备适配
-#define kLXAdaptiveMargin(VALUE) (round(((VALUE)*(kLXDeviceWidth == 320 ? 0.9 : ((kLXDeviceWidth == 375) ? 1 : 1.1)))))
+#define kLXAdaptiveMargin(VALUE) ({int sign = 1;\
+                                  if (VALUE < 0) {\
+                                  sign = -1;}\
+                                  float result = sign*round(((sign*VALUE)*(kLQDeviceWidth == 320 ? 0.9 : ((kLQDeviceWidth == 375) ? 1 : 1.1))));\
+                                  (result);})
 #define kLXViewSafeAreaInsets(VIEW) ({UIEdgeInsets i; if(@available(iOS 11.0, *)) {i = VIEW.safeAreaInsets;} else {i = UIEdgeInsetsZero;} i;})
 #define kLXStatusBarHeight    ({CGFloat statusHeight = 20;\
-                              CGFloat safeTop = kLXViewSafeAreaInsets(kLXTopWindow).top;\
+                              CGFloat safeTop = kLXViewSafeAreaInsets(UIApplication.sharedApplication.keyWindow).top;\
                               if (safeTop == 44) { \
                                  statusHeight = 44;\
                               }\
@@ -46,19 +50,19 @@
 
 #define kLXTopWindow          ({UIWindow* window = nil; if (@available(iOS 13.0, *)) { \
                                     for (UIWindowScene* wScene in [UIApplication sharedApplication].connectedScenes) { \
-                                        if (wScene.activationState == UISceneActivationStateForegroundActive) { \
+                                        if (wScene.activationState != UISceneActivationStateUnattached) { \
                                             window = wScene.windows.lastObject; break; } } \
                                         }else {\
                                             window = [UIApplication sharedApplication].keyWindow; \
                                         }\
                                (window);})
 #define kLXNavBarHeight       ({CGFloat statusHeight = 20;\
-                               CGFloat safeTop = kLXViewSafeAreaInsets(kLXTopWindow).top;\
+                               CGFloat safeTop = kLXViewSafeAreaInsets(UIApplication.sharedApplication.keyWindow).top;\
                                if (safeTop == 44) { \
                                   statusHeight = 44;\
                                 }\
                                (statusHeight + 44);})
-#define kLXIsXSeriesDevice     (kLXViewSafeAreaInsets(kLXTopWindow).top > 0)
+#define kLXIsXSeriesDevice     (kLXViewSafeAreaInsets(UIApplication.sharedApplication.keyWindow).top > 20)
 
 #define kLXTextCalculateSize(TEXT,MAXWIDTH,FONT)  ({CGSize sizeC = CGSizeZero;\
                                                     do { \
