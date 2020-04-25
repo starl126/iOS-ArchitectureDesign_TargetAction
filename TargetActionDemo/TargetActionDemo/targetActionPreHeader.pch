@@ -13,6 +13,7 @@
 
     #import <YYModel.h>
     #import <AFNetworking/AFNetworking.h>
+    #import <MJRefresh/MJRefresh.h>
 
     #import "ProjectHeader.h"
 

@@ -8,6 +8,19 @@
 
 #import "LXBHomeController.h"
 
+@interface LXName : NSObject
+
+@property (nonatomic, copy) NSString* name;
+@property (nonatomic, assign) NSInteger age;
+@property (nonatomic, assign) BOOL male;
+
+@end
+
+@implementation LXName
+
+
+@end
+
 @interface LXBHomeController ()
 
 @end
@@ -18,6 +31,16 @@
     [super viewDidLoad];
     self.navigationItem.title = @"直播";
     self.view.lx_backgroundColor(UIColor.whiteColor);
+}
+extern uint64_t dispatch_benchmark(size_t count, void (^block)(void));
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+
+    dispatch_benchmark(10, ^{
+        
+    });
+}
+void target_stop_hook() {
+    printf("发生了一次target stop");
 }
 
 @end

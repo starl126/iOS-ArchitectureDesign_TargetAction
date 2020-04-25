@@ -8,6 +8,8 @@
 
 #import "LXCHomeController.h"
 
+#define LX_DEPRECATED_IOS(iosIntro,iosDep,...) (__attribute__((availability(ios,introduced=_iosIntro,deprecated=_iosDep,message="" __VA_ARGS__))))
+
 @interface LXCHomeController ()
 
 @end
@@ -19,5 +21,15 @@
     self.navigationItem.title = @"消息";
     self.view.lx_backgroundColor(UIColor.orangeColor);
 }
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event  {
+    NSArray* arr = [NSArray array];
+    if (arr[2]) {
+        
+    }
+}
+- (void)p_test {
+    
+}
+
 
 @end

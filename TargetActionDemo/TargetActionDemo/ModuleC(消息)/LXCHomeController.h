@@ -8,8 +8,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+__attribute__((objc_subclassing_restricted))
 ///消息
 @interface LXCHomeController : UIViewController
+
+- (void)p_test:(NSInteger)num __attribute__((availability(ios,introduced=9,deprecated=11,message="use")));
 
 @end
 
