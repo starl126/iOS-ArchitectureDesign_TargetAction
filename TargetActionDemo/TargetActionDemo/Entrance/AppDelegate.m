@@ -18,8 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    self.window.rootViewController = [self appRootVC];
     [self.window makeKeyAndVisible];
+    self.window.rootViewController = [self appRootVC];
     return YES;
 }
 
