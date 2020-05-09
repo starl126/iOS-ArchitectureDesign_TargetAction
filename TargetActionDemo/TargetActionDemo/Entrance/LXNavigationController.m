@@ -39,7 +39,6 @@
     return ori;
 }
 - (BOOL)prefersStatusBarHidden {
-    [self setNeedsStatusBarAppearanceUpdate];
     return [self.visibleViewController prefersStatusBarHidden];
 }
 - (UIStatusBarStyle)preferredStatusBarStyle {
