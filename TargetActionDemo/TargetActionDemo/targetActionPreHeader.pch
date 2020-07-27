@@ -11,9 +11,10 @@
 
 #ifdef __OBJC__
 
-    #import <YYModel.h>
+    #import <YYModel/YYModel.h>
     #import <AFNetworking/AFNetworking.h>
     #import <MJRefresh/MJRefresh.h>
+    #import <OCMock/OCMock.h>
 
     #import "ProjectHeader.h"
 

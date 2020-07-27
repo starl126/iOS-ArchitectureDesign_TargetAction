@@ -17,7 +17,7 @@
 #define kLXBlockOnMain(block) ([NSThread isMainThread] ? block() : dispatch_async(dispatch_get_main_queue(),block))
 
 #pragma mark --- 尺寸大小
-#define kLXDeviceSize        ({CGFloat scale = 2.0/UIScreen.mainScreen.currentMode.pixelAspectRatio;\
+#define kLXDeviceSize        ({CGFloat scale = UIScreen.mainScreen.scale;\
                              CGSize physicalSize = CGSizeMake(UIScreen.mainScreen.currentMode.size.width/scale, \
                              UIScreen.mainScreen.currentMode.size.height/scale);(physicalSize);})
 #define kLXDeviceWidth       kLXDeviceSize.width

@@ -27,8 +27,8 @@
         
     }
 }
-- (void)p_test {
-    
+- (void)p_test:(NSInteger)num {
+    LXLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 

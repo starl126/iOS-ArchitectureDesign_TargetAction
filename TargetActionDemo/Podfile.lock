@@ -15,24 +15,28 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - MJRefresh (3.4.1)
+  - OCMock (3.6)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.2.1)
   - MJRefresh (~> 3.4.1)
+  - OCMock (~> 3.6)
   - YYModel (~> 1.0.4)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - MJRefresh
+    - OCMock
     - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
+  OCMock: 5ea90566be239f179ba766fd9fbae5885040b992
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: d41448ca39a00f3c2cc36fe143f551e1fa1aa817
+PODFILE CHECKSUM: 484e4ca394a6569b570febb9c8fc0c5c526e71a2
 
 COCOAPODS: 1.9.1
