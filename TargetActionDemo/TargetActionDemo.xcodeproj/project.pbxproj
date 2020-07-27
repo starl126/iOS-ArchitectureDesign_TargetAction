@@ -22,6 +22,11 @@
 		4B4EE77C2453E06000A22E25 /* UIView+LXNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4EE7782453E06000A22E25 /* UIView+LXNetwork.m */; };
 		4B4EE77D2453E06000A22E25 /* LXAgencyObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4EE77A2453E06000A22E25 /* LXAgencyObserver.m */; };
 		4B6E265623CC0A9A00091815 /* LXHttpBLLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6E265523CC0A9A00091815 /* LXHttpBLLHandler.m */; };
+		4B78674024CE8526004CCAD5 /* SMCPUMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78673F24CE8526004CCAD5 /* SMCPUMonitor.m */; };
+		4B78674324CE853C004CCAD5 /* SMCallStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78674124CE853C004CCAD5 /* SMCallStack.m */; };
+		4B78674624CE8546004CCAD5 /* SMCallLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78674424CE8546004CCAD5 /* SMCallLib.m */; };
+		4B78674924CE8562004CCAD5 /* SMCallStackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78674824CE8562004CCAD5 /* SMCallStackModel.m */; };
+		4B78674C24CE8640004CCAD5 /* SMLagMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78674B24CE8640004CCAD5 /* SMLagMonitor.m */; };
 		4B9FF88722C73A0500905548 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF88622C73A0500905548 /* AppDelegate.m */; };
 		4B9FF88F22C73A0700905548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B9FF88E22C73A0700905548 /* Assets.xcassets */; };
 		4B9FF89222C73A0700905548 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B9FF89022C73A0700905548 /* LaunchScreen.storyboard */; };
@@ -108,6 +113,16 @@
 		4B4EE77B2453E06000A22E25 /* LXAgencyObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXAgencyObserver.h; sourceTree = "<group>"; };
 		4B6E265423CC0A9A00091815 /* LXHttpBLLHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXHttpBLLHandler.h; sourceTree = "<group>"; };
 		4B6E265523CC0A9A00091815 /* LXHttpBLLHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXHttpBLLHandler.m; sourceTree = "<group>"; };
+		4B78673E24CE8526004CCAD5 /* SMCPUMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCPUMonitor.h; sourceTree = "<group>"; };
+		4B78673F24CE8526004CCAD5 /* SMCPUMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCPUMonitor.m; sourceTree = "<group>"; };
+		4B78674124CE853C004CCAD5 /* SMCallStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCallStack.m; sourceTree = "<group>"; };
+		4B78674224CE853C004CCAD5 /* SMCallStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCallStack.h; sourceTree = "<group>"; };
+		4B78674424CE8546004CCAD5 /* SMCallLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCallLib.m; sourceTree = "<group>"; };
+		4B78674524CE8546004CCAD5 /* SMCallLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCallLib.h; sourceTree = "<group>"; };
+		4B78674724CE8561004CCAD5 /* SMCallStackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCallStackModel.h; sourceTree = "<group>"; };
+		4B78674824CE8562004CCAD5 /* SMCallStackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCallStackModel.m; sourceTree = "<group>"; };
+		4B78674A24CE8640004CCAD5 /* SMLagMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLagMonitor.h; sourceTree = "<group>"; };
+		4B78674B24CE8640004CCAD5 /* SMLagMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMLagMonitor.m; sourceTree = "<group>"; };
 		4B9FF88222C73A0500905548 /* TargetActionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TargetActionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B9FF88522C73A0500905548 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4B9FF88622C73A0500905548 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -282,6 +297,23 @@
 			path = LXNetwork;
 			sourceTree = "<group>";
 		};
+		4B78673D24CE84F9004CCAD5 /* 性能检测 */ = {
+			isa = PBXGroup;
+			children = (
+				4B78674A24CE8640004CCAD5 /* SMLagMonitor.h */,
+				4B78674B24CE8640004CCAD5 /* SMLagMonitor.m */,
+				4B78674524CE8546004CCAD5 /* SMCallLib.h */,
+				4B78674424CE8546004CCAD5 /* SMCallLib.m */,
+				4B78673E24CE8526004CCAD5 /* SMCPUMonitor.h */,
+				4B78673F24CE8526004CCAD5 /* SMCPUMonitor.m */,
+				4B78674224CE853C004CCAD5 /* SMCallStack.h */,
+				4B78674124CE853C004CCAD5 /* SMCallStack.m */,
+				4B78674724CE8561004CCAD5 /* SMCallStackModel.h */,
+				4B78674824CE8562004CCAD5 /* SMCallStackModel.m */,
+			);
+			path = "性能检测";
+			sourceTree = "<group>";
+		};
 		4B9FF87922C73A0500905548 = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +341,7 @@
 		4B9FF88422C73A0500905548 /* TargetActionDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4B78673D24CE84F9004CCAD5 /* 性能检测 */,
 				4B44D28A23960CCF00748BFC /* Entrance */,
 				4B44D28923960CC000748BFC /* Mediator */,
 				4B44D28823960CB200748BFC /* Configuration */,
@@ -757,6 +790,9 @@
 				4B9FF8DA22C742DE00905548 /* Target_ModuleB.m in Sources */,
 				4B4EE77C2453E06000A22E25 /* UIView+LXNetwork.m in Sources */,
 				4B44D29123960F7C00748BFC /* AppDelegate+ThirdSDK.m in Sources */,
+				4B78674324CE853C004CCAD5 /* SMCallStack.m in Sources */,
+				4B78674C24CE8640004CCAD5 /* SMLagMonitor.m in Sources */,
+				4B78674624CE8546004CCAD5 /* SMCallLib.m in Sources */,
 				4B9FF8F622C749DC00905548 /* LXEHomeController.m in Sources */,
 				4B9FF8D222C7421C00905548 /* LXMediator.m in Sources */,
 				4B6E265623CC0A9A00091815 /* LXHttpBLLHandler.m in Sources */,
@@ -776,10 +812,12 @@
 				4B9FF8B922C73AD500905548 /* LXTabBarController.m in Sources */,
 				4B4EE77D2453E06000A22E25 /* LXAgencyObserver.m in Sources */,
 				4B9FF8DF22C7486300905548 /* Target_ModuleC.m in Sources */,
+				4B78674924CE8562004CCAD5 /* SMCallStackModel.m in Sources */,
 				4B2100BA246A8C3600596B99 /* LSLBacktraceLogger.m in Sources */,
 				4B44D28D23960D3000748BFC /* AppDelegate+RootVc.m in Sources */,
 				4B9FF8EA22C7496B00905548 /* LXAHomeController.m in Sources */,
 				4B9FF8C122C73D6E00905548 /* LXNavigationController.m in Sources */,
+				4B78674024CE8526004CCAD5 /* SMCPUMonitor.m in Sources */,
 				4B9FF8E322C7487E00905548 /* Target_ModuleD.m in Sources */,
 				4B2100B7246A7DF900596B99 /* LXETestController.m in Sources */,
 			);
