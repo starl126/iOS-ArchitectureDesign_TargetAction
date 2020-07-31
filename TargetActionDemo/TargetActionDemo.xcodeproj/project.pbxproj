@@ -27,6 +27,8 @@
 		4B78674624CE8546004CCAD5 /* SMCallLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78674424CE8546004CCAD5 /* SMCallLib.m */; };
 		4B78674924CE8562004CCAD5 /* SMCallStackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78674824CE8562004CCAD5 /* SMCallStackModel.m */; };
 		4B78674C24CE8640004CCAD5 /* SMLagMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78674B24CE8640004CCAD5 /* SMLagMonitor.m */; };
+		4B78675124CED4F1004CCAD5 /* LXMachExpMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78675024CED4F1004CCAD5 /* LXMachExpMonitor.m */; };
+		4B78675E24D3C5F9004CCAD5 /* EncryptTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B78675C24D3C5F9004CCAD5 /* EncryptTools.m */; };
 		4B9FF88722C73A0500905548 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF88622C73A0500905548 /* AppDelegate.m */; };
 		4B9FF88F22C73A0700905548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B9FF88E22C73A0700905548 /* Assets.xcassets */; };
 		4B9FF89222C73A0700905548 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B9FF89022C73A0700905548 /* LaunchScreen.storyboard */; };
@@ -123,6 +125,10 @@
 		4B78674824CE8562004CCAD5 /* SMCallStackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCallStackModel.m; sourceTree = "<group>"; };
 		4B78674A24CE8640004CCAD5 /* SMLagMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLagMonitor.h; sourceTree = "<group>"; };
 		4B78674B24CE8640004CCAD5 /* SMLagMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMLagMonitor.m; sourceTree = "<group>"; };
+		4B78674F24CED4F1004CCAD5 /* LXMachExpMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXMachExpMonitor.h; sourceTree = "<group>"; };
+		4B78675024CED4F1004CCAD5 /* LXMachExpMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXMachExpMonitor.m; sourceTree = "<group>"; };
+		4B78675C24D3C5F9004CCAD5 /* EncryptTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptTools.m; sourceTree = "<group>"; };
+		4B78675D24D3C5F9004CCAD5 /* EncryptTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptTools.h; sourceTree = "<group>"; };
 		4B9FF88222C73A0500905548 /* TargetActionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TargetActionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B9FF88522C73A0500905548 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4B9FF88622C73A0500905548 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -300,6 +306,15 @@
 		4B78673D24CE84F9004CCAD5 /* 性能检测 */ = {
 			isa = PBXGroup;
 			children = (
+				4B78674E24CECEEA004CCAD5 /* Mach异常检测 */,
+				4B78674D24CECEA1004CCAD5 /* 卡顿堆栈检测 */,
+			);
+			path = "性能检测";
+			sourceTree = "<group>";
+		};
+		4B78674D24CECEA1004CCAD5 /* 卡顿堆栈检测 */ = {
+			isa = PBXGroup;
+			children = (
 				4B78674A24CE8640004CCAD5 /* SMLagMonitor.h */,
 				4B78674B24CE8640004CCAD5 /* SMLagMonitor.m */,
 				4B78674524CE8546004CCAD5 /* SMCallLib.h */,
@@ -311,7 +326,25 @@
 				4B78674724CE8561004CCAD5 /* SMCallStackModel.h */,
 				4B78674824CE8562004CCAD5 /* SMCallStackModel.m */,
 			);
-			path = "性能检测";
+			path = "卡顿堆栈检测";
+			sourceTree = "<group>";
+		};
+		4B78674E24CECEEA004CCAD5 /* Mach异常检测 */ = {
+			isa = PBXGroup;
+			children = (
+				4B78674F24CED4F1004CCAD5 /* LXMachExpMonitor.h */,
+				4B78675024CED4F1004CCAD5 /* LXMachExpMonitor.m */,
+			);
+			path = "Mach异常检测";
+			sourceTree = "<group>";
+		};
+		4B78675B24D3C5EB004CCAD5 /* 常用工具 */ = {
+			isa = PBXGroup;
+			children = (
+				4B78675D24D3C5F9004CCAD5 /* EncryptTools.h */,
+				4B78675C24D3C5F9004CCAD5 /* EncryptTools.m */,
+			);
+			path = "常用工具";
 			sourceTree = "<group>";
 		};
 		4B9FF87922C73A0500905548 = {
@@ -341,6 +374,7 @@
 		4B9FF88422C73A0500905548 /* TargetActionDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4B78675B24D3C5EB004CCAD5 /* 常用工具 */,
 				4B78673D24CE84F9004CCAD5 /* 性能检测 */,
 				4B44D28A23960CCF00748BFC /* Entrance */,
 				4B44D28923960CC000748BFC /* Mediator */,
@@ -796,6 +830,8 @@
 				4B9FF8F622C749DC00905548 /* LXEHomeController.m in Sources */,
 				4B9FF8D222C7421C00905548 /* LXMediator.m in Sources */,
 				4B6E265623CC0A9A00091815 /* LXHttpBLLHandler.m in Sources */,
+				4B78675124CED4F1004CCAD5 /* LXMachExpMonitor.m in Sources */,
+				4B78675E24D3C5F9004CCAD5 /* EncryptTools.m in Sources */,
 				4B2361FD23C70A6E00F7D04C /* LXHttpConfigureManager.m in Sources */,
 				4B32012523C84E2700C44E44 /* LXHttpTaskPool.m in Sources */,
 				4B9FF89522C73A0700905548 /* main.m in Sources */,

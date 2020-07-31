@@ -9,6 +9,8 @@
 #import "LXEHomeController.h"
 #import "LXHttpSessionTask.h"
 #import "LXETestController.h"
+#import "SMCallStack.h"
+#import "SMLagMonitor.h"
 
 #import <mach/task_info.h>
 #import <mach/task.h>
@@ -16,6 +18,8 @@
 #import <mach/thread_act.h>
 #import <mach/thread_info.h>
 #import <mach/vm_map.h>
+
+#import "EncryptTools.h"
 
 @interface LXEHomeController ()
 
@@ -47,8 +51,18 @@
 //    [self testSemaphore];
     
 //    [self testThreadPermanantLife];
-    [NSThread detachNewThreadSelector:@selector(p_postNotification01:) toTarget:self withObject:@"notification_01"];
-    [NSThread detachNewThreadSelector:@selector(p_postNotification02:) toTarget:self withObject:@"notification_02"];
+//    [NSThread detachNewThreadSelector:@selector(p_postNotification01:) toTarget:self withObject:@"notification_01"];
+//    [NSThread detachNewThreadSelector:@selector(p_postNotification02:) toTarget:self withObject:@"notification_02"];
+//    NSString* str = [SMCallStack callStackWithType:SMCallStackTypeAll];
+//    NSLog(@"---\n%@", str);
+//    NSString* str = [SMCallStack callStackWithType:SMCallStackTypeMain];
+//    NSLog(@"%@", str);
+    
+    NSString* key = @"sksksk";
+    NSString* iv = @"hkkk";
+    NSString* result = [EncryptTools encryptDESString:@"shjkdkdkk" keyString:key iv:iv];
+    NSString* original = [EncryptTools decryptDESString:result keyString:key iv:iv];
+    NSLog(@"result=%@, original=%@", result, original);
 }
 - (void)p_postNotification01:(NSString *)noti {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"noti_01" object:nil];
