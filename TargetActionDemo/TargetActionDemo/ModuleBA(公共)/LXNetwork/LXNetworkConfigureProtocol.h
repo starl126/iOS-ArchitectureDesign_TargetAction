@@ -85,6 +85,19 @@ typedef NS_ENUM(NSUInteger, LXRefreshOption) {
  */
 - (void)lx_successRequestCurrentPageData:(nullable NSArray*)curArr totalData:(nullable NSArray*)totalArr url:(nonnull NSString*)url;
 
+/**
+ 分页网络数据的总条数和页数回调
+ @param total 总条数
+ @param pages 总页数
+ */
+- (void)lx_successRequestTotalCounts:(NSInteger)total pages:(NSInteger)pages;
+
+/**
+ 是否在请求网络中
+ @param inNetwork 是否请求网络中
+ */
+- (void)lx_requestInNetwork:(BOOL)inNetwork;
+
 @end
 
 

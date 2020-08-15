@@ -162,6 +162,12 @@
     id parameter = [self lx_checkedParameter];
     self.lx_requesting = YES;
     self.lx_scrollPositionObv.lx_requesting = YES;
+    
+    /// 传递网络请求状态
+    if (self.lx_delegate && [self.lx_delegate respondsToSelector:@selector(lx_requestInNetwork:)]) {
+        [self.lx_delegate lx_requestInNetwork:YES];
+    }
+    
     //NSLog(@"111111更新刷新状态-%d-%d-%@",self.lx_requesting,self.lx_scrollPositionObv.lx_requesting,self.lx_scrollPositionObv);
     LXWeakSelf;
     switch (method) {
@@ -420,6 +426,12 @@
     }
     self.lx_requesting = NO;
     self.lx_scrollPositionObv.lx_requesting = NO;
+    
+    /// 传递网络请求状态
+    if (self.lx_delegate && [self.lx_delegate respondsToSelector:@selector(lx_requestInNetwork:)]) {
+        [self.lx_delegate lx_requestInNetwork:NO];
+    }
+    
     //NSLog(@"请求完成--%d--%d--%@",self.lx_requesting,self.lx_scrollPositionObv.lx_requesting,self.lx_scrollPositionObv);
     if (responseObject) {
         //NSLog(@"3333333333333");
@@ -467,6 +479,12 @@
                 
                 if (self.lx_current == 1) {
                     [self.lx_dataSourceArrM setArray:models];
+                    
+                    if (self.lx_delegate && [self.lx_delegate respondsToSelector:@selector(lx_successRequestTotalCounts:pages:)]) {
+                        NSInteger total = [dictData[@"total"] integerValue];
+                        NSInteger pages = [dictData[@"pages"] integerValue];
+                        [self.lx_delegate lx_successRequestTotalCounts:total pages:pages];
+                    }
                 }else {
                     [self.lx_dataSourceArrM addObjectsFromArray:models];
                 }
