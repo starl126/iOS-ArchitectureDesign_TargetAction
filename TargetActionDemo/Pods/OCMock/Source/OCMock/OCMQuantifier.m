@@ -14,10 +14,9 @@
  *  under the License.
  */
 
-#import <Foundation/Foundation.h>
+#import "OCMQuantifier.h"
 #import "OCMMacroState.h"
 #import "OCMVerifier.h"
-#import "OCMQuantifier.h"
 
 
 @interface OCMExactCountQuantifier : OCMQuantifier
@@ -79,7 +78,7 @@
     {
         case 0:  return @"never";
         case 1:  return @"once";
-        default: return [NSString stringWithFormat:@"%ld times", expectedCount];
+        default: return [NSString stringWithFormat:@"%lu times", (unsigned long)expectedCount];
     }
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0AD3D0A852987148D90F2292 /* Pods_TargetActionDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ED011A835AC66ED71C7604E /* Pods_TargetActionDemo.framework */; };
+		48E4AB4D2564B9FC000203DB /* LXdladdr.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E4AB4C2564B9FC000203DB /* LXdladdr.m */; };
 		4B2100B7246A7DF900596B99 /* LXETestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2100B6246A7DF900596B99 /* LXETestController.m */; };
 		4B2100BA246A8C3600596B99 /* LSLBacktraceLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2100B9246A8C3600596B99 /* LSLBacktraceLogger.m */; };
 		4B2100C2246AC04500596B99 /* TargetActionDemo1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2100C1246AC04500596B99 /* TargetActionDemo1Tests.m */; };
@@ -47,7 +48,7 @@
 		4B9FF8ED22C7498000905548 /* LXBHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8EC22C7498000905548 /* LXBHomeController.m */; };
 		4B9FF8F022C7498E00905548 /* LXCHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8EF22C7498E00905548 /* LXCHomeController.m */; };
 		4B9FF8F322C7499B00905548 /* LXDHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8F222C7499B00905548 /* LXDHomeController.m */; };
-		4B9FF8F622C749DC00905548 /* LXEHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8F522C749DC00905548 /* LXEHomeController.m */; };
+		4B9FF8F622C749DC00905548 /* LXEHomeController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8F522C749DC00905548 /* LXEHomeController.mm */; };
 		4B9FF90122C74FBE00905548 /* CALayer+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8F922C74FBD00905548 /* CALayer+LX.m */; };
 		4B9FF90222C74FBE00905548 /* NSArray+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8FB22C74FBD00905548 /* NSArray+LX.m */; };
 		4B9FF90322C74FBE00905548 /* UIView+LX.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FF8FE22C74FBE00905548 /* UIView+LX.m */; };
@@ -83,6 +84,8 @@
 /* Begin PBXFileReference section */
 		0AA1AB6F9A0043FF09AFE544 /* Pods_TargetActionDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TargetActionDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FF751815B96EA462A8062C /* Pods-TargetActionDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TargetActionDemo.debug.xcconfig"; path = "Target Support Files/Pods-TargetActionDemo/Pods-TargetActionDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		48E4AB4B2564B9FC000203DB /* LXdladdr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXdladdr.h; sourceTree = "<group>"; };
+		48E4AB4C2564B9FC000203DB /* LXdladdr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXdladdr.m; sourceTree = "<group>"; };
 		4B2100B5246A7DF900596B99 /* LXETestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXETestController.h; sourceTree = "<group>"; };
 		4B2100B6246A7DF900596B99 /* LXETestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXETestController.m; sourceTree = "<group>"; };
 		4B2100B8246A8C3600596B99 /* LSLBacktraceLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSLBacktraceLogger.h; sourceTree = "<group>"; };
@@ -174,7 +177,7 @@
 		4B9FF8F122C7499B00905548 /* LXDHomeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXDHomeController.h; sourceTree = "<group>"; };
 		4B9FF8F222C7499B00905548 /* LXDHomeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXDHomeController.m; sourceTree = "<group>"; };
 		4B9FF8F422C749DC00905548 /* LXEHomeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXEHomeController.h; sourceTree = "<group>"; };
-		4B9FF8F522C749DC00905548 /* LXEHomeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXEHomeController.m; sourceTree = "<group>"; };
+		4B9FF8F522C749DC00905548 /* LXEHomeController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LXEHomeController.mm; sourceTree = "<group>"; };
 		4B9FF8F922C74FBD00905548 /* CALayer+LX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LX.m"; sourceTree = "<group>"; };
 		4B9FF8FA22C74FBD00905548 /* NSArray+LX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LX.h"; sourceTree = "<group>"; };
 		4B9FF8FB22C74FBD00905548 /* NSArray+LX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LX.m"; sourceTree = "<group>"; };
@@ -232,6 +235,15 @@
 				0AA1AB6F9A0043FF09AFE544 /* Pods_TargetActionDemoTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		48E4AB4A2564B9A2000203DB /* 系统分析工具 */ = {
+			isa = PBXGroup;
+			children = (
+				48E4AB4B2564B9FC000203DB /* LXdladdr.h */,
+				48E4AB4C2564B9FC000203DB /* LXdladdr.m */,
+			);
+			path = "系统分析工具";
 			sourceTree = "<group>";
 		};
 		4B2100C0246AC04500596B99 /* TargetActionDemo1Tests */ = {
@@ -306,6 +318,7 @@
 		4B78673D24CE84F9004CCAD5 /* 性能检测 */ = {
 			isa = PBXGroup;
 			children = (
+				48E4AB4A2564B9A2000203DB /* 系统分析工具 */,
 				4B78674E24CECEEA004CCAD5 /* Mach异常检测 */,
 				4B78674D24CECEA1004CCAD5 /* 卡顿堆栈检测 */,
 			);
@@ -443,7 +456,7 @@
 				4B9FF8E422C7488300905548 /* Actions */,
 				4B9FF8CC22C7406200905548 /* EHeader.h */,
 				4B9FF8F422C749DC00905548 /* LXEHomeController.h */,
-				4B9FF8F522C749DC00905548 /* LXEHomeController.m */,
+				4B9FF8F522C749DC00905548 /* LXEHomeController.mm */,
 				4B2100B5246A7DF900596B99 /* LXETestController.h */,
 				4B2100B6246A7DF900596B99 /* LXETestController.m */,
 				4B2100B8246A8C3600596B99 /* LSLBacktraceLogger.h */,
@@ -827,7 +840,7 @@
 				4B78674324CE853C004CCAD5 /* SMCallStack.m in Sources */,
 				4B78674C24CE8640004CCAD5 /* SMLagMonitor.m in Sources */,
 				4B78674624CE8546004CCAD5 /* SMCallLib.m in Sources */,
-				4B9FF8F622C749DC00905548 /* LXEHomeController.m in Sources */,
+				4B9FF8F622C749DC00905548 /* LXEHomeController.mm in Sources */,
 				4B9FF8D222C7421C00905548 /* LXMediator.m in Sources */,
 				4B6E265623CC0A9A00091815 /* LXHttpBLLHandler.m in Sources */,
 				4B78675124CED4F1004CCAD5 /* LXMachExpMonitor.m in Sources */,
@@ -836,6 +849,7 @@
 				4B32012523C84E2700C44E44 /* LXHttpTaskPool.m in Sources */,
 				4B9FF89522C73A0700905548 /* main.m in Sources */,
 				4B9FF8F322C7499B00905548 /* LXDHomeController.m in Sources */,
+				48E4AB4D2564B9FC000203DB /* LXdladdr.m in Sources */,
 				4B2100CB246B890500596B99 /* LXXCTestExample.m in Sources */,
 				4B9FF90122C74FBE00905548 /* CALayer+LX.m in Sources */,
 				4B9FF90422C74FBE00905548 /* NSDictionary+LX.m in Sources */,
@@ -1066,6 +1080,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TGAGLHJ62P;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TargetActionDemo/targetActionPreHeader.pch;
 				INFOPLIST_FILE = TargetActionDemo/Info.plist;
@@ -1087,6 +1102,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TGAGLHJ62P;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TargetActionDemo/targetActionPreHeader.pch;
 				INFOPLIST_FILE = TargetActionDemo/Info.plist;

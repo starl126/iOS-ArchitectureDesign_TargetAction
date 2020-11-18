@@ -16,10 +16,7 @@
 
 #import "OCMMacroState.h"
 #import "OCMStubRecorder.h"
-#import "OCMockObject.h"
 #import "OCMExpectationRecorder.h"
-#import "OCMVerifier.h"
-#import "OCMInvocationMatcher.h"
 
 
 @implementation OCMMacroState
@@ -41,11 +38,15 @@ static NSString *const OCMGlobalStateKey = @"OCMGlobalStateKey";
     NSMutableDictionary *threadDictionary = [NSThread currentThread].threadDictionary;
     OCMMacroState *globalState = threadDictionary[OCMGlobalStateKey];
     OCMStubRecorder *recorder = [[(OCMStubRecorder *)[globalState recorder] retain] autorelease];
+    BOOL didThrow = [globalState invocationDidThrow];
     [threadDictionary removeObjectForKey:OCMGlobalStateKey];
-	if([recorder wasUsed] == NO)
+	if(didThrow == NO && [recorder didRecordInvocation] == NO)
 	{
 		[NSException raise:NSInternalInconsistencyException
-					format:@"Mock object was not used in OCMStub/OCMExpect/OCMReject. Did you accidentally use a real object?"];
+					format:@"Did not record an invocation in OCMStub/OCMExpect/OCMReject.\n"
+						   @"Possible causes are:\n"
+						   @"- The receiver is not a mock object.\n"
+						   @"- The selector conflicts with a selector implemented by OCMStubRecorder/OCMExpectationRecorder."];
 	}
     return recorder;
 }
@@ -68,7 +69,6 @@ static NSString *const OCMGlobalStateKey = @"OCMGlobalStateKey";
 + (void)beginRejectMacro
 {
     OCMExpectationRecorder *recorder = [[[OCMExpectationRecorder alloc] init] autorelease];
-    [recorder never];
     OCMMacroState *macroState = [[OCMMacroState alloc] initWithRecorder:recorder];
     [NSThread currentThread].threadDictionary[OCMGlobalStateKey] = macroState;
     [macroState release];
@@ -76,6 +76,10 @@ static NSString *const OCMGlobalStateKey = @"OCMGlobalStateKey";
 
 + (OCMStubRecorder *)endRejectMacro
 {
+    OCMMacroState *globalState = [NSThread currentThread].threadDictionary[OCMGlobalStateKey];
+    // Calling never after the invocation to avoid running afoul of ARC's expectations on
+    // return values from init methods.
+    [(OCMExpectationRecorder *)[globalState recorder] never];
     return [self endStubMacro];
 }
 
@@ -100,12 +104,16 @@ static NSString *const OCMGlobalStateKey = @"OCMGlobalStateKey";
 	NSMutableDictionary *threadDictionary = [NSThread currentThread].threadDictionary;
 	OCMMacroState *globalState = threadDictionary[OCMGlobalStateKey];
 	OCMVerifier *verifier = [[(OCMVerifier *)[globalState recorder] retain] autorelease];
+    BOOL didThrow = [globalState invocationDidThrow];
 	[threadDictionary removeObjectForKey:OCMGlobalStateKey];
-	if([verifier wasUsed] == NO)
-	{
-		[NSException raise:NSInternalInconsistencyException
-					format:@"Mock object was not used in OCMVerify. Did you accidentally use a real object?"];
-	}
+	if(didThrow == NO && [verifier didRecordInvocation] == NO)
+    {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"Did not record an invocation in OCMVerify.\n"
+                           @"Possible causes are:\n"
+                           @"- The receiver is not a mock object.\n"
+                           @"- The selector conflicts with a selector implemented by OCMVerifier."];
+    }
 }
 
 
@@ -121,7 +129,7 @@ static NSString *const OCMGlobalStateKey = @"OCMGlobalStateKey";
 
 - (id)initWithRecorder:(OCMRecorder *)aRecorder
 {
-    if ((self = [super init]))
+    if((self = [super init]))
     {
         recorder = [aRecorder retain];
     }
@@ -132,7 +140,8 @@ static NSString *const OCMGlobalStateKey = @"OCMGlobalStateKey";
 - (void)dealloc
 {
     [recorder release];
-    NSAssert([NSThread currentThread].threadDictionary[OCMGlobalStateKey] != self, @"Unexpected dealloc while set as the global state");
+    if([NSThread currentThread].threadDictionary[OCMGlobalStateKey] == self)
+        [NSException raise:NSInternalInconsistencyException format:@"Unexpected dealloc while set as the global state"];
     [super dealloc];
 }
 
@@ -145,6 +154,16 @@ static NSString *const OCMGlobalStateKey = @"OCMGlobalStateKey";
 - (OCMRecorder *)recorder
 {
     return recorder;
+}
+
+- (void)setInvocationDidThrow:(BOOL)flag
+{
+    invocationDidThrow = flag;
+}
+
+- (BOOL)invocationDidThrow
+{
+    return invocationDidThrow;
 }
 
 

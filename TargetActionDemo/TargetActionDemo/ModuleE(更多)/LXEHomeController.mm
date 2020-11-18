@@ -21,6 +21,9 @@
 
 #import "EncryptTools.h"
 
+#import <dlfcn.h>
+#import "LXdladdr.h"
+
 @interface LXEHomeController ()
 
 @property (nonatomic, strong) LXHttpSessionTask* sessionTask;
@@ -37,32 +40,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_observerNoti02:) name:@"noti_02" object:nil];
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    double size = [LXEHomeController getMemoryUsage];
-//    LXLog(@"%lfM",size);
-//
-//    double cpu = [LXEHomeController getCpuUsage];
-//    LXLog(@"%.2lf%%",cpu*100);
-//
-//    LXETestController* testVc = [[LXETestController alloc] init];
-//    [self.navigationController pushViewController:testVc animated:YES];
+
+    NSArray<NSString *> *arr = [LXdladdr getNonDyldClassName];
+
     
-//    [self testMainThread];
-//    [self testPerformSelectorMultiThread];
-//    [self testSemaphore];
-    
-//    [self testThreadPermanantLife];
-//    [NSThread detachNewThreadSelector:@selector(p_postNotification01:) toTarget:self withObject:@"notification_01"];
-//    [NSThread detachNewThreadSelector:@selector(p_postNotification02:) toTarget:self withObject:@"notification_02"];
-//    NSString* str = [SMCallStack callStackWithType:SMCallStackTypeAll];
-//    NSLog(@"---\n%@", str);
-//    NSString* str = [SMCallStack callStackWithType:SMCallStackTypeMain];
-//    NSLog(@"%@", str);
-    
-    NSString* key = @"sksksk";
-    NSString* iv = @"hkkk";
-    NSString* result = [EncryptTools encryptDESString:@"shjkdkdkk" keyString:key iv:iv];
-    NSString* original = [EncryptTools decryptDESString:result keyString:key iv:iv];
-    NSLog(@"result=%@, original=%@", result, original);
 }
 - (void)p_postNotification01:(NSString *)noti {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"noti_01" object:nil];

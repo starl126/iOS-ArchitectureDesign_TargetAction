@@ -52,6 +52,9 @@
         OCMStubRecorder *recorder = nil; \
         @try{ \
             invocation; \
+        }@catch(...){ \
+            [[OCMMacroState globalState] setInvocationDidThrow:YES]; \
+            @throw; \
         }@finally{ \
             recorder = [OCMMacroState endStubMacro]; \
         } \
@@ -66,6 +69,9 @@
         OCMStubRecorder *recorder = nil; \
         @try{ \
             invocation; \
+        }@catch(...){ \
+            [[OCMMacroState globalState] setInvocationDidThrow:YES]; \
+            @throw; \
         }@finally{ \
             recorder = [OCMMacroState endExpectMacro]; \
         } \
@@ -80,6 +86,9 @@
         OCMStubRecorder *recorder = nil; \
         @try{ \
             invocation; \
+        }@catch(...){ \
+            [[OCMMacroState globalState] setInvocationDidThrow:YES]; \
+            @throw; \
         }@finally{ \
             recorder = [OCMMacroState endRejectMacro]; \
         } \
@@ -101,9 +110,9 @@
 #endif
 
 
-#define OCMVerifyAll(mock) [mock verifyAtLocation:OCMMakeLocation(self, __FILE__, __LINE__)]
+#define OCMVerifyAll(mock) [(OCMockObject *)mock verifyAtLocation:OCMMakeLocation(self, __FILE__, __LINE__)]
 
-#define OCMVerifyAllWithDelay(mock, delay) [mock verifyWithDelay:delay atLocation:OCMMakeLocation(self, __FILE__, __LINE__)]
+#define OCMVerifyAllWithDelay(mock, delay) [(OCMockObject *)mock verifyWithDelay:delay atLocation:OCMMakeLocation(self, __FILE__, __LINE__)]
 
 #define _OCMVerify(invocation) \
 ({ \
@@ -111,6 +120,9 @@
         [OCMMacroState beginVerifyMacroAtLocation:OCMMakeLocation(self, __FILE__, __LINE__)]; \
         @try{ \
             invocation; \
+        }@catch(...){ \
+            [[OCMMacroState globalState] setInvocationDidThrow:YES]; \
+            @throw; \
         }@finally{ \
             [OCMMacroState endVerifyMacro]; \
         } \
@@ -123,6 +135,9 @@
         [OCMMacroState beginVerifyMacroAtLocation:OCMMakeLocation(self, __FILE__, __LINE__) withQuantifier:quantifier]; \
         @try{ \
            invocation; \
+        }@catch(...){ \
+            [[OCMMacroState globalState] setInvocationDidThrow:YES]; \
+            @throw; \
         }@finally{ \
             [OCMMacroState endVerifyMacro]; \
         } \

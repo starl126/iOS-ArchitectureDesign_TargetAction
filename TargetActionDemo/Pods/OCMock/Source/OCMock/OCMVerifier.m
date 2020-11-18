@@ -14,17 +14,19 @@
  *  under the License.
  */
 
-#import <objc/runtime.h>
 #import "OCMVerifier.h"
 #import "OCMockObject.h"
-#import "OCMLocation.h"
 #import "OCMInvocationMatcher.h"
+#import "OCMLocation.h"
+#import "OCMQuantifier.h"
 
 
 @implementation OCMVerifier
 
 - (id)init
 {
+    if(invocationMatcher != nil)
+        [NSException raise:NSInternalInconsistencyException format:@"** Method init invoked twice on verifier. Are you trying to verify the init method? This is currently not supported."];
     if ((self = [super init]))
     {
         invocationMatcher = [[OCMInvocationMatcher alloc] init];

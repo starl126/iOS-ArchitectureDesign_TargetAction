@@ -24,8 +24,7 @@
     }
     [super pushViewController:viewController animated:animated];
 }
-
-#pragma mark --- rotate and status bar
+#pragma mark - rotate and status bar
 - (BOOL)shouldAutorotate {
     BOOL autorotate = [self.visibleViewController shouldAutorotate];
     return autorotate;

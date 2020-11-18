@@ -24,7 +24,9 @@
 
 - (id)initWithProtocol:(Protocol *)aProtocol
 {
-    NSParameterAssert(aProtocol != nil);
+	if(aProtocol == nil)
+		[NSException raise:NSInvalidArgumentException format:@"Protocol cannot be nil."];
+
 	[super init];
 	mockedProtocol = aProtocol;
 	return self;
@@ -33,7 +35,7 @@
 - (NSString *)description
 {
     const char* name = protocol_getName(mockedProtocol);
-    return [NSString stringWithFormat:@"OCMockObject(%s)", name];
+    return [NSString stringWithFormat:@"OCProtocolMockObject(%s)", name];
 }
 
 #pragma mark  Proxy API
