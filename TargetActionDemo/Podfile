@@ -8,6 +8,9 @@ target 'TargetActionDemo' do
   pod 'AFNetworking', '~> 3.2.1'
   pod 'MJRefresh', '~> 3.4.1'
   pod 'OCMock', '~> 3.6'
+  pod 'SDWebImage'
+  pod 'SDWebImage/WebP'
+  
   
 end
 

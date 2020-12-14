@@ -14,29 +14,50 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - libwebp (1.1.0):
+    - libwebp/demux (= 1.1.0)
+    - libwebp/mux (= 1.1.0)
+    - libwebp/webp (= 1.1.0)
+  - libwebp/demux (1.1.0):
+    - libwebp/webp
+  - libwebp/mux (1.1.0):
+    - libwebp/demux
+  - libwebp/webp (1.1.0)
   - MJRefresh (3.4.3)
   - OCMock (3.7.1)
+  - SDWebImage (4.4.8):
+    - SDWebImage/Core (= 4.4.8)
+  - SDWebImage/Core (4.4.8)
+  - SDWebImage/WebP (4.4.8):
+    - libwebp (< 2.0, >= 0.5)
+    - SDWebImage/Core
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.2.1)
   - MJRefresh (~> 3.4.1)
   - OCMock (~> 3.6)
+  - SDWebImage
+  - SDWebImage/WebP
   - YYModel (~> 1.0.4)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
+    - libwebp
     - MJRefresh
     - OCMock
+    - SDWebImage
     - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  libwebp: 946cb3063cea9236285f7e9a8505d806d30e07f3
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   OCMock: 75fbeaa46a9b11f8c182bbb1d1f7e9a35ccc9955
+  SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 484e4ca394a6569b570febb9c8fc0c5c526e71a2
+PODFILE CHECKSUM: 5ca7c16789adadd7b86dffce843345a8bdfc131e
 
 COCOAPODS: 1.10.0
