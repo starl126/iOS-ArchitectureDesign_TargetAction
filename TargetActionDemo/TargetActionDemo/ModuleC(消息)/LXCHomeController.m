@@ -12,6 +12,8 @@
 
 @interface LXCHomeController ()
 
+@property (nonatomic, strong) NSMapTable *mapTable;
+
 @end
 
 @implementation LXCHomeController
@@ -20,12 +22,20 @@
     [super viewDidLoad];
     self.navigationItem.title = @"消息";
     self.view.lx_backgroundColor(UIColor.orangeColor);
+    self.mapTable = [[NSMapTable alloc] initWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableWeakMemory capacity:0];
+    
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    LXLog(@"%@", self.mapTable);
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event  {
-    NSArray* arr = [NSArray array];
-    if (arr[2]) {
-        
-    }
+    [self.mapTable setObject:@"key2" forKey:@"starxin"];
+    UIViewController *vc = [[UIViewController alloc] init];
+    vc.view.backgroundColor = [UIColor lightGrayColor];
+    vc.navigationItem.title = @"Test";
+    [self.mapTable setObject:vc forKey:@"key1"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)p_test:(NSInteger)num {
     LXLog(@"%s",__PRETTY_FUNCTION__);

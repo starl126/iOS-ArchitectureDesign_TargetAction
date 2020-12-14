@@ -26,7 +26,7 @@
     #import "ModuleE(更多)/EHeader.h"
 
 #if DEBUG
-#define LXLog(format,...) printf("\n文件名:%s, 方法名:%s, 行数:%d, 时间:%s, 打印内容: %s", [NSString stringWithUTF8String:__FILE__].lastPathComponent.UTF8String,__PRETTY_FUNCTION__,__LINE__,__TIME__,[NSString stringWithFormat:format, ##__VA_ARGS__].UTF8String)
+#define LXLog(format,...) printf("文件名:%s, 方法名:%s, 行数:%d, 时间:%s, 打印内容: %s\n", [NSString stringWithUTF8String:__FILE__].lastPathComponent.UTF8String,__PRETTY_FUNCTION__,__LINE__,__TIME__,[NSString stringWithFormat:format, ##__VA_ARGS__].UTF8String)
 #else
     #define LXLog(fmt, ...)
 #endif

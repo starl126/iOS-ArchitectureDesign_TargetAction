@@ -22,11 +22,19 @@
 #import "EncryptTools.h"
 
 #import <dlfcn.h>
+#import <mach-o/dyld.h>
+#import <mach-o/getsect.h>
 #import "LXdladdr.h"
+#import <mach/mach_time.h>
+
+typedef void (^WXModuleCallback)(id result);
+typedef void (^WXModuleKeepAliveCallback)(id result, BOOL keepAlive);
 
 @interface LXEHomeController ()
 
 @property (nonatomic, strong) LXHttpSessionTask* sessionTask;
+@property (nonatomic, strong) dispatch_semaphore_t signal;
+@property (nonatomic, strong) dispatch_queue_t queue;
 
 @end
 
@@ -38,12 +46,94 @@
     self.view.lx_backgroundColor(UIColor.whiteColor);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_observerNoti01:) name:@"noti_01" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_observerNoti02:) name:@"noti_02" object:nil];
+    
+    UIImageView *imgV = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imgV.image = [UIImage imageNamed:@"Image"];
+    [self.view addSubview:imgV];
+    self.signal = dispatch_semaphore_create(1);
+    self.queue = dispatch_queue_create(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-
-    NSArray<NSString *> *arr = [LXdladdr getNonDyldClassName];
-
+    Method method = class_getInstanceMethod(self.class, @selector(p_testName:callback:keepCallback:));
+    char des[40];
+    const char *types = method_getTypeEncoding(method);
+//     [NSMethodSignature methodForSelector:@selector(p_testName:callback:keepCallback:)];
+//    NSMethodSignature *signature = [self.class instanceMethodSignatureForSelector:@selector(p_testName:callback:keepCallback:)];
+//    const char *type1 = [signature getArgumentTypeAtIndex:3];
+//    const char *type2 = [signature getArgumentTypeAtIndex:4];
     
+    Method method2 = class_getInstanceMethod(self.class, @selector(p_testName:keepCallback:));
+    const char *types2 = method_getTypeEncoding(method2);
+    
+    NSURL *url = [NSURL URLWithString:@"iosbridge://methodName/type=0/1?params=""&commandId=1234"];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        dispatch_semaphore_wait(self.signal, DISPATCH_TIME_FOREVER);
+        dispatch_async(self.queue, ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                LXLog(@"111111111");
+                dispatch_semaphore_signal(self.signal);
+            });
+        });
+        
+        dispatch_semaphore_wait(self.signal, DISPATCH_TIME_FOREVER);
+        dispatch_async(self.queue, ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                LXLog(@"22222222222");
+                dispatch_semaphore_signal(self.signal);
+            });
+        });
+        
+        dispatch_semaphore_wait(self.signal, DISPATCH_TIME_FOREVER);
+        dispatch_async(self.queue, ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                LXLog(@"33333333333");
+                dispatch_semaphore_signal(self.signal);
+            });
+        });
+    });
+}
+
+- (void)p_testName:(NSString *)name callback:(WXModuleCallback)callback keepCallback:(WXModuleKeepAliveCallback)keepCallback {
+    
+}
+- (void)p_testName:(NSString *)name keepCallback:(WXModuleKeepAliveCallback)keepCallback {
+    
+}
+/// 测试内部方法有没有被外界hook
+BOOL checkMethodBeHooked(Class cls, SEL selector) {
+    
+    //你也可以借助runtime中的C函数来获取方法的实现地址
+    IMP imp = [cls methodForSelector:selector];
+    
+    if(imp == NULL)
+        
+        return NO;
+    
+    //计算出可执行程序的slide值。
+    
+    intptr_t pmh = (intptr_t)_dyld_get_image_header(1);
+    
+#ifdef __LP64__
+    const struct segment_command_64 *psegment = getsegbyname("__TEXT");
+#else
+    const struct segment_command *psegment = getsegbyname("__TEXT");
+#endif
+    
+    intptr_t slide = pmh - psegment->vmaddr;
+    
+    unsigned long startpos = (unsigned long)pmh;
+    
+    unsigned long endpos = get_end() + slide;
+    
+    unsigned long imppos = (unsigned long)imp;
+    
+    return(imppos < startpos) || (imppos > endpos);
+    
+}
+void termFunc(void *objAddr) {
+    printf("%s", objAddr);
 }
 - (void)p_postNotification01:(NSString *)noti {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"noti_01" object:nil];

@@ -26,7 +26,20 @@
     for (id key in dict) {
         LXLog(@"%@", key);
     }
+    NSMutableArray *arrM = [NSMutableArray arrayWithArray:@[@(1), @(2)]];
+    [self p_first:arrM];
+    
 }
-
+- (void)p_first:(NSMutableArray *)arrM {
+    NSArray *arr = [self p_second:arrM];
+    arr = [arr mutableCopy];
+    
+}
+- (NSArray *)p_second:(NSArray *)arr {
+    NSMutableArray *arrM = [NSMutableArray arrayWithArray:arr];
+    
+    arr = [NSArray arrayWithArray:arrM];
+    return arr;
+}
 
 @end
