@@ -43,8 +43,8 @@
 #define kLXViewSafeAreaInsets(VIEW) ({UIEdgeInsets i; if(@available(iOS 11.0, *)) {i = VIEW.safeAreaInsets;} else {i = UIEdgeInsetsZero;} i;})
 #define kLXStatusBarHeight    ({CGFloat statusHeight = 20;\
                               CGFloat safeTop = kLXViewSafeAreaInsets(UIApplication.sharedApplication.keyWindow).top;\
-                              if (safeTop == 44) { \
-                                 statusHeight = 44;\
+                              if (safeTop > 20) { \
+                                 statusHeight = safeTop;\
                               }\
                               (statusHeight);})
 
